@@ -15,6 +15,7 @@
 		35832E5C29F7D2500000B38E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */; };
 		35832E6029F7E6120000B38E /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E5F29F7E6120000B38E /* LogInView.swift */; };
 		35832E6229F7F3EB0000B38E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E6129F7F3EB0000B38E /* ContentView.swift */; };
+		35832E6529F7FD5A0000B38E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E6429F7FD5A0000B38E /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		35832E5F29F7E6120000B38E /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		35832E6129F7F3EB0000B38E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		35832E6429F7FD5A0000B38E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +62,10 @@
 		35832E4829F7C90B0000B38E /* AwesomeStore */ = {
 			isa = PBXGroup;
 			children = (
-				35832E5729F7CDC40000B38E /* Fonts */,
+				35832E6329F7FD350000B38E /* Views */,
 				35832E4929F7C90B0000B38E /* AwesomeStoreApp.swift */,
-				35832E4B29F7C90B0000B38E /* SignInView.swift */,
-				35832E5F29F7E6120000B38E /* LogInView.swift */,
-				35832E6129F7F3EB0000B38E /* ContentView.swift */,
 				35832E4D29F7C90E0000B38E /* Assets.xcassets */,
+				35832E5729F7CDC40000B38E /* Fonts */,
 				35832E5A29F7CE450000B38E /* Info.plist */,
 				35832E4F29F7C90E0000B38E /* Preview Content */,
 			);
@@ -87,6 +87,17 @@
 				35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		35832E6329F7FD350000B38E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35832E4B29F7C90B0000B38E /* SignInView.swift */,
+				35832E5F29F7E6120000B38E /* LogInView.swift */,
+				35832E6129F7F3EB0000B38E /* ContentView.swift */,
+				35832E6429F7FD5A0000B38E /* ProfileView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			files = (
 				35832E6029F7E6120000B38E /* LogInView.swift in Sources */,
 				35832E4C29F7C90B0000B38E /* SignInView.swift in Sources */,
+				35832E6529F7FD5A0000B38E /* ProfileView.swift in Sources */,
 				35832E6229F7F3EB0000B38E /* ContentView.swift in Sources */,
 				35832E4A29F7C90B0000B38E /* AwesomeStoreApp.swift in Sources */,
 			);
