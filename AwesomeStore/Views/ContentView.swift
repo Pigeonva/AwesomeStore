@@ -15,7 +15,10 @@ struct ContentView: View {
         ZStack {
             if selected == 0 {
                 HomeView()
-            } else if selected == 3{
+            } else if selected == 1 {
+                FavoritesView()
+            }
+            else if selected == 3{
                 ProfileView()
             }
             VStack {
