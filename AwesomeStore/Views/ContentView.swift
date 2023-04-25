@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @State var selected = 0
-    @State var view = "House"
     
     var body: some View {
         ZStack {
@@ -19,12 +18,9 @@ struct ContentView: View {
             }
             VStack {
                 Spacer()
-                Text("\(view)")
-                Spacer()
                 HStack {
                     Spacer()
                     Button {
-                        self.view = "House"
                         self.selected = 0
                     } label: {
                         Image(systemName: "house")
@@ -33,7 +29,6 @@ struct ContentView: View {
                     }
                     Spacer()
                     Button {
-                        self.view = "Favourite"
                         self.selected = 1
                     } label: {
                         Image(systemName: "heart")
@@ -42,7 +37,6 @@ struct ContentView: View {
                     }
                     Spacer()
                     Button {
-                        self.view = "Cart"
                         self.selected = 2
                     } label: {
                         Image(systemName: "cart")
@@ -51,7 +45,6 @@ struct ContentView: View {
                     }
                     Spacer()
                     Button {
-                        self.view = "Profile"
                         self.selected = 3
                     } label: {
                         Image(systemName: "person")
