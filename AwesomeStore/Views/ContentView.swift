@@ -13,7 +13,9 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if selected == 3 {
+            if selected == 0 {
+                HomeView()
+            } else if selected == 3{
                 ProfileView()
             }
             VStack {
