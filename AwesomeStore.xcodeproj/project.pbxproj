@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		35832E4A29F7C90B0000B38E /* AwesomeStoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E4929F7C90B0000B38E /* AwesomeStoreApp.swift */; };
-		35832E4C29F7C90B0000B38E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E4B29F7C90B0000B38E /* ContentView.swift */; };
+		35832E4C29F7C90B0000B38E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E4B29F7C90B0000B38E /* SignInView.swift */; };
 		35832E4E29F7C90E0000B38E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35832E4D29F7C90E0000B38E /* Assets.xcassets */; };
 		35832E5129F7C90E0000B38E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5029F7C90E0000B38E /* Preview Assets.xcassets */; };
+		35832E5929F7CDDF0000B38E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		35832E4629F7C90B0000B38E /* AwesomeStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35832E4929F7C90B0000B38E /* AwesomeStoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeStoreApp.swift; sourceTree = "<group>"; };
-		35832E4B29F7C90B0000B38E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		35832E4B29F7C90B0000B38E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		35832E4D29F7C90E0000B38E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35832E5029F7C90E0000B38E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		35832E5A29F7CE450000B38E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +54,11 @@
 		35832E4829F7C90B0000B38E /* AwesomeStore */ = {
 			isa = PBXGroup;
 			children = (
+				35832E5729F7CDC40000B38E /* Fonts */,
 				35832E4929F7C90B0000B38E /* AwesomeStoreApp.swift */,
-				35832E4B29F7C90B0000B38E /* ContentView.swift */,
+				35832E4B29F7C90B0000B38E /* SignInView.swift */,
 				35832E4D29F7C90E0000B38E /* Assets.xcassets */,
+				35832E5A29F7CE450000B38E /* Info.plist */,
 				35832E4F29F7C90E0000B38E /* Preview Content */,
 			);
 			path = AwesomeStore;
@@ -65,6 +70,14 @@
 				35832E5029F7C90E0000B38E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		35832E5729F7CDC40000B38E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35832E5929F7CDDF0000B38E /* Montserrat-Regular.ttf in Resources */,
 				35832E5129F7C90E0000B38E /* Preview Assets.xcassets in Resources */,
 				35832E4E29F7C90E0000B38E /* Assets.xcassets in Resources */,
 			);
@@ -137,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35832E4C29F7C90B0000B38E /* ContentView.swift in Sources */,
+				35832E4C29F7C90B0000B38E /* SignInView.swift in Sources */,
 				35832E4A29F7C90B0000B38E /* AwesomeStoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +284,7 @@
 				DEVELOPMENT_TEAM = TGHY26G8ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AwesomeStore/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +314,7 @@
 				DEVELOPMENT_TEAM = TGHY26G8ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AwesomeStore/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
