@@ -12,6 +12,7 @@
 		35832E4E29F7C90E0000B38E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35832E4D29F7C90E0000B38E /* Assets.xcassets */; };
 		35832E5129F7C90E0000B38E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5029F7C90E0000B38E /* Preview Assets.xcassets */; };
 		35832E5929F7CDDF0000B38E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */; };
+		35832E5C29F7D2500000B38E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		35832E5029F7C90E0000B38E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		35832E5A29F7CE450000B38E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		35832E5729F7CDC40000B38E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */,
 				35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */,
 			);
 			path = Fonts;
@@ -140,6 +143,7 @@
 			files = (
 				35832E5929F7CDDF0000B38E /* Montserrat-Regular.ttf in Resources */,
 				35832E5129F7C90E0000B38E /* Preview Assets.xcassets in Resources */,
+				35832E5C29F7D2500000B38E /* Montserrat-SemiBold.ttf in Resources */,
 				35832E4E29F7C90E0000B38E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
