@@ -87,15 +87,14 @@ struct SignInView: View {
                             .font(.custom("Montserrat", size: 15))
                     }
                 } .padding(.top, 50)
-
-
+                
+                
             }
         } .ignoresSafeArea(.all)
     }
-    
+}
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             SignInView()
         }
-    }
 }
