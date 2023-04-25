@@ -13,6 +13,7 @@
 		35832E5129F7C90E0000B38E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5029F7C90E0000B38E /* Preview Assets.xcassets */; };
 		35832E5929F7CDDF0000B38E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */; };
 		35832E5C29F7D2500000B38E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */; };
+		35832E6029F7E6120000B38E /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35832E5F29F7E6120000B38E /* LogInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		35832E5829F7CDDF0000B38E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		35832E5A29F7CE450000B38E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		35832E5B29F7D2500000B38E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		35832E5F29F7E6120000B38E /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				35832E5729F7CDC40000B38E /* Fonts */,
 				35832E4929F7C90B0000B38E /* AwesomeStoreApp.swift */,
 				35832E4B29F7C90B0000B38E /* SignInView.swift */,
+				35832E5F29F7E6120000B38E /* LogInView.swift */,
 				35832E4D29F7C90E0000B38E /* Assets.xcassets */,
 				35832E5A29F7CE450000B38E /* Info.plist */,
 				35832E4F29F7C90E0000B38E /* Preview Content */,
@@ -155,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35832E6029F7E6120000B38E /* LogInView.swift in Sources */,
 				35832E4C29F7C90B0000B38E /* SignInView.swift in Sources */,
 				35832E4A29F7C90B0000B38E /* AwesomeStoreApp.swift in Sources */,
 			);
