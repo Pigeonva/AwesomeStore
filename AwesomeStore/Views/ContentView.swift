@@ -9,19 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var selected = 0
+    @State var viewModel: ContentViewViewModel
     
     var body: some View {
         ZStack {
-            if selected == 0 {
-                HomeView()
-            } else if selected == 1 {
-                FavoritesView()
+            if viewModel.selected == 0 {
+                 HomeView()
+            } else if viewModel.selected == 1 {
+                 FavoritesView()
             }
-            else if selected == 2 {
-                CartView()
+            else if viewModel.selected == 2 {
+                 CartView()
             } else {
-                ProfileView()
+                ProfileView(isPesentContent: $viewModel.isPesentContent)
             }
             
             VStack {
@@ -29,35 +29,35 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button {
-                        self.selected = 0
+                        viewModel.selected = 0
                     } label: {
                         Image(systemName: "house")
                             .font(.title2)
-                            .foregroundColor(self.selected == 0 ? .black : .gray)
+                            .foregroundColor(viewModel.selected == 0 ? .black : .gray)
                     }
                     Spacer()
                     Button {
-                        self.selected = 1
+                        viewModel.selected = 1
                     } label: {
                         Image(systemName: "heart")
                             .font(.title2)
-                            .foregroundColor(self.selected == 1 ? .black : .gray)
+                            .foregroundColor(viewModel.selected == 1 ? .black : .gray)
                     }
                     Spacer()
                     Button {
-                        self.selected = 2
+                        viewModel.selected = 2
                     } label: {
                         Image(systemName: "cart")
                             .font(.title2)
-                            .foregroundColor(self.selected == 2 ? .black : .gray)
+                            .foregroundColor(viewModel.selected == 2 ? .black : .gray)
                     }
                     Spacer()
                     Button {
-                        self.selected = 3
+                        viewModel.selected = 3
                     } label: {
                         Image(systemName: "person")
                             .font(.title2)
-                            .foregroundColor(self.selected == 3 ? .black : .gray)
+                            .foregroundColor(viewModel.selected == 3 ? .black : .gray)
                     }
                     Spacer()
                 }
@@ -68,11 +68,6 @@ struct ContentView: View {
                 .cornerRadius(20)
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        .navigationBarBackButtonHidden()
     }
 }

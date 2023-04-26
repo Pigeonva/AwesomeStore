@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    @Binding var isPesentContent: Bool
+    
     var body: some View {
         ZStack {
             Color("Background")
@@ -45,21 +48,17 @@ struct ProfileView: View {
                         }
                         .padding(.horizontal, 50)
                     }
-                    Button {
-                        //
-                    } label: {
-                        HStack(spacing: 10) {
-                            Image(systemName: "creditcard")
-                                .foregroundColor(.black)
-                            Text("Cashback")
-                                .font(.custom("Montserrat", size: 15))
-                                .foregroundColor(.black)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.black)
-                        }
-                        .padding(.horizontal, 50)
+                    HStack(spacing: 10) {
+                        Image(systemName: "person.text.rectangle")
+                            .foregroundColor(.black)
+                        Text("My balance: 5000$")
+                            .font(.custom("Montserrat", size: 15))
+                            .foregroundColor(.black)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.black)
                     }
+                    .padding(.horizontal, 50)
                     Button {
                         //
                     } label: {
@@ -106,7 +105,7 @@ struct ProfileView: View {
                         .padding(.horizontal, 50)
                     }
                     Button {
-                        //
+                        isPesentContent = false
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "door.right.hand.open")
@@ -126,11 +125,5 @@ struct ProfileView: View {
             .padding(.bottom, 100)
         }
         .ignoresSafeArea()
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }
