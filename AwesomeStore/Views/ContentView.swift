@@ -18,9 +18,12 @@ struct ContentView: View {
             } else if selected == 1 {
                 FavoritesView()
             }
-            else if selected == 3{
+            else if selected == 2 {
+                CartView()
+            } else {
                 ProfileView()
             }
+            
             VStack {
                 Spacer()
                 HStack {

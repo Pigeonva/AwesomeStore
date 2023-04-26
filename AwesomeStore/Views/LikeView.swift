@@ -30,7 +30,7 @@ struct LikeView: View {
                 } label: {
                     Image(systemName: "x.circle")
                         .foregroundColor(.black)
-                        .font(.largeTitle)
+                        .font(.title)
                 }
                 Spacer()
             }
