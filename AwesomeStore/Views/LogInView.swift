@@ -9,7 +9,8 @@ import SwiftUI
 
 struct LogInView: View {
     
-    @State var viewModel: LogInViewViewModel
+    @ObservedObject var viewModel: LogInViewViewModel
+    @Binding var goToRoot: Bool
     
     var body: some View {
         ZStack {
@@ -32,16 +33,21 @@ struct LogInView: View {
                     .background(Color("TextField"))
                     .clipShape(Capsule())
                     .frame(width: 289, height: 29)
-                NavigationLink(isActive: $viewModel.isPresentContent, destination: {
-                    ContentView(viewModel: ContentViewViewModel(user: viewModel.user, isPesentContent: $viewModel.isPresentContent))
-                }, label: {
-                    Text("Log in")
-                        .font(.custom("Montserrat", size: 15))
-                        .frame(width: 289, height: 46, alignment: .center)
-                        .foregroundColor(.white)
-                        .background(Color("Button"))
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                })
+                Button {
+                    //
+                } label: {
+                    NavigationLink(destination: {
+                        ContentView(viewModel: ContentViewViewModel(user: viewModel.user), goToRoot: $goToRoot)
+                    }, label: {
+                        Text("Log in")
+                            .font(.custom("Montserrat", size: 15))
+                            .frame(width: 289, height: 46, alignment: .center)
+                            .foregroundColor(.white)
+                            .background(Color("Button"))
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    })
+                }
+
 
             }
         } .ignoresSafeArea(.all)

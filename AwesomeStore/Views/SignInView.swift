@@ -9,7 +9,14 @@ import SwiftUI
 
 struct SignInView: View {
     
- @State private var viewModel = SignInViewModel()
+    @ObservedObject var viewModel: SignInViewModel
+    @State var goToRoot = false
+    
+    
+    init(viewModel: SignInViewModel) {
+        self.viewModel = viewModel
+    }
+    
     
     var body: some View {
         NavigationView {
@@ -19,41 +26,54 @@ struct SignInView: View {
                     Text("Sign in")
                         .font(.custom("Montserrat-semibold", size: 30))
                         .padding(.bottom, 50)
-                    TextField("Full name", text: $viewModel.user.fullName)
+                    TextField("Full name", text: $viewModel.fullName)
                         .font(.custom("Montserrat", size: 12))
                         .multilineTextAlignment(.center)
                         .frame(width: 289, height: 29)
                         .background(Color("TextField"))
                         .clipShape(Capsule())
                         .frame(width: 289, height: 29)
-                    TextField("Email", text: $viewModel.user.email)
+                    TextField("Email", text: $viewModel.email)
                         .font(.custom("Montserrat", size: 12))
                         .multilineTextAlignment(.center)
                         .frame(width: 289, height: 29)
                         .background(Color("TextField"))
                         .clipShape(Capsule())
                         .frame(width: 289, height: 29)
-                    SecureField("Password", text: $viewModel.user.password)
+                    SecureField("Password", text: $viewModel.password)
                         .font(.custom("Montserrat", size: 12))
                         .multilineTextAlignment(.center)
                         .frame(width: 289, height: 29)
                         .background(Color("TextField"))
                         .clipShape(Capsule())
                         .frame(width: 289, height: 29)
-                    NavigationLink(isActive: $viewModel.isPesentContent, destination: {
-                        ContentView(viewModel: ContentViewViewModel(user: viewModel.user, isPesentContent: $viewModel.isPesentContent))
-                    }, label: {
-                        Text("Sign in")
-                            .font(.custom("Montserrat", size: 15))
-                            .frame(width: 289, height: 46, alignment: .center)
-                            .foregroundColor(.white)
-                            .background(Color("Button"))
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                    })
+                    
+                    Button(action: viewModel.checkTextFields) {
+                        NavigationLink(isActive: $goToRoot, destination: {
+                            
+                            ContentView(viewModel: ContentViewViewModel(user: User()), goToRoot: $goToRoot)
+                            
+                        }, label: {
+                            Text("Sign in")
+                                .font(.custom("Montserrat", size: 15))
+                                .frame(width: 289, height: 46, alignment: .center)
+                                .foregroundColor(.white)
+                                .background(Color("Button"))
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                        })
+                        .disabled(viewModel.isHidden)
+                    }
+                    .alert(viewModel.title, isPresented: $viewModel.showAlert) {
+                        //
+                    } message: {
+                        Text(viewModel.message)
+                    }
+
+                    
                     HStack(spacing: 10) {
                         Text("Already have an account?")
                             .font(.custom("Montserrat", size: 12))
-                        NavigationLink(destination: LogInView(viewModel: LogInViewViewModel(user: viewModel.user, users: viewModel.users, isPresentContent: $viewModel.isPesentContent))) {
+                        NavigationLink(destination: LogInView(viewModel: LogInViewViewModel(), goToRoot: $goToRoot), isActive: $goToRoot) {
                             Text("Log in")
                                 .font(.custom("Montserrat", size: 12))
                         }
@@ -88,12 +108,8 @@ struct SignInView: View {
                     
                 }
             } .ignoresSafeArea(.all)
-                
+            
         }
     }
 }
-    struct SignInView_Previews: PreviewProvider {
-        static var previews: some View {
-            SignInView()
-        }
-}
+

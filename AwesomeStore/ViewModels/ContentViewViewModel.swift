@@ -7,10 +7,13 @@
 
 import SwiftUI
 
-struct ContentViewViewModel {
-    var user = User()
-    var selected = 0
-    @Binding var isPesentContent: Bool
+class ContentViewViewModel: ObservableObject {
+    var user: User
+    @Published var selected = 0
+    
+    init(user: User) {
+        self.user = user
+    }
     
     func goToLoginView() {
         

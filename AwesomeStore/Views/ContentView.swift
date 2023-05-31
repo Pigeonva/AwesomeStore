@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var viewModel: ContentViewViewModel
+    @ObservedObject var viewModel: ContentViewViewModel
+    @Binding var goToRoot: Bool
     
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct ContentView: View {
             else if viewModel.selected == 2 {
                  CartView()
             } else {
-                ProfileView(isPesentContent: $viewModel.isPesentContent)
+                ProfileView(goToRoot: $goToRoot)
             }
             
             VStack {

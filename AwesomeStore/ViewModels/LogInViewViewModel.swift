@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct LogInViewViewModel {
-    var user = User()
-    var users = [User]()
-    @Binding var isPresentContent: Bool
+class LogInViewViewModel: ObservableObject {
+    @Published var user = User()
+    @Published var users = [User]()
     
-    
+    func correctData() {
+        
+    }
 }

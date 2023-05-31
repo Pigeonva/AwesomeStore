@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @Binding var isPesentContent: Bool
+    @Binding var goToRoot: Bool
     
     var body: some View {
         ZStack {
@@ -105,7 +105,7 @@ struct ProfileView: View {
                         .padding(.horizontal, 50)
                     }
                     Button {
-                        isPesentContent = false
+                        goToRoot = false
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "door.right.hand.open")
