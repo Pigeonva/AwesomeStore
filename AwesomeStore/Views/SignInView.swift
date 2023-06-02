@@ -33,6 +33,11 @@ struct SignInView: View {
                         .background(Color("TextField"))
                         .clipShape(Capsule())
                         .frame(width: 289, height: 29)
+                    Text(viewModel.nameMessage)
+                        .font(.custom("Montserrat-semibold", size: 12))
+                        .frame(width: 289, height: 29)
+                        .foregroundColor(.red)
+                        .padding(.top, -25)
                     TextField("Email", text: $viewModel.email)
                         .font(.custom("Montserrat", size: 12))
                         .multilineTextAlignment(.center)
@@ -40,6 +45,12 @@ struct SignInView: View {
                         .background(Color("TextField"))
                         .clipShape(Capsule())
                         .frame(width: 289, height: 29)
+                        .padding(.top, -25)
+                    Text(viewModel.emailMessage)
+                        .font(.custom("Montserrat-semibold", size: 12))
+                        .frame(width: 289, height: 29)
+                        .foregroundColor(.red)
+                        .padding(.top, -25)
                     SecureField("Password", text: $viewModel.password)
                         .font(.custom("Montserrat", size: 12))
                         .multilineTextAlignment(.center)
@@ -47,8 +58,14 @@ struct SignInView: View {
                         .background(Color("TextField"))
                         .clipShape(Capsule())
                         .frame(width: 289, height: 29)
+                        .padding(.top, -25)
+                    Text(viewModel.passwordMessage)
+                        .font(.custom("Montserrat-semibold", size: 12))
+                        .frame(width: 289, height: 29)
+                        .foregroundColor(.red)
+                        .padding(.top, -25)
                     
-                    Button(action: viewModel.checkTextFields) {
+                    Button(action: {}) {
                         NavigationLink(isActive: $goToRoot, destination: {
                             
                             ContentView(viewModel: ContentViewViewModel(user: User()), goToRoot: $goToRoot)
@@ -61,14 +78,7 @@ struct SignInView: View {
                                 .background(Color("Button"))
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                         })
-                        .disabled(viewModel.isHidden)
                     }
-                    .alert(viewModel.title, isPresented: $viewModel.showAlert) {
-                        //
-                    } message: {
-                        Text(viewModel.message)
-                    }
-
                     
                     HStack(spacing: 10) {
                         Text("Already have an account?")
