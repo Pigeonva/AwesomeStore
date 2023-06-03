@@ -51,14 +51,23 @@ struct SignInView: View {
                             .frame(width: 289, height: 29)
                             .padding(.top, -25)
                             .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
                             .onDisappear {
+                                viewModel.createUser()
                                 viewModel.email = ""
                             }
-                        Text(viewModel.emailMessage)
-                            .font(.custom("Montserrat-semibold", size: 12))
-                            .frame(width: 289, height: 29)
-                            .foregroundColor(.red)
-                            .padding(.top, -25)
+                        ZStack {
+                            Text(viewModel.userMessage)
+                                .font(.custom("Montserrat-semibold", size: 12))
+                                .frame(width: 289, height: 29)
+                                .foregroundColor(.red)
+                                .padding(.top, -25)
+                            Text(viewModel.emailMessage)
+                                .font(.custom("Montserrat-semibold", size: 12))
+                                .frame(width: 289, height: 29)
+                                .foregroundColor(.red)
+                                .padding(.top, -25)
+                        }
                         SecureField("Password", text: $viewModel.password)
                             .font(.custom("Montserrat", size: 12))
                             .multilineTextAlignment(.center)
