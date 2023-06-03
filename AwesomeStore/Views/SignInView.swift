@@ -10,7 +10,7 @@ import SwiftUI
 struct SignInView: View {
     
     @ObservedObject var viewModel: SignInViewModel
-    @State var goToRoot = false
+    
     
     
     init(viewModel: SignInViewModel) {
@@ -19,71 +19,81 @@ struct SignInView: View {
     
     
     var body: some View {
-        NavigationView {
             ZStack {
                 Color("Background")
                 VStack(spacing: 30) {
-                    Text("Sign in")
-                        .font(.custom("Montserrat-semibold", size: 30))
-                        .padding(.bottom, 50)
-                    TextField("Full name", text: $viewModel.fullName)
-                        .font(.custom("Montserrat", size: 12))
-                        .multilineTextAlignment(.center)
-                        .frame(width: 289, height: 29)
-                        .background(Color("TextField"))
-                        .clipShape(Capsule())
-                        .frame(width: 289, height: 29)
-                    Text(viewModel.nameMessage)
-                        .font(.custom("Montserrat-semibold", size: 12))
-                        .frame(width: 289, height: 29)
-                        .foregroundColor(.red)
-                        .padding(.top, -25)
-                    TextField("Email", text: $viewModel.email)
-                        .font(.custom("Montserrat", size: 12))
-                        .multilineTextAlignment(.center)
-                        .frame(width: 289, height: 29)
-                        .background(Color("TextField"))
-                        .clipShape(Capsule())
-                        .frame(width: 289, height: 29)
-                        .padding(.top, -25)
-                    Text(viewModel.emailMessage)
-                        .font(.custom("Montserrat-semibold", size: 12))
-                        .frame(width: 289, height: 29)
-                        .foregroundColor(.red)
-                        .padding(.top, -25)
-                    SecureField("Password", text: $viewModel.password)
-                        .font(.custom("Montserrat", size: 12))
-                        .multilineTextAlignment(.center)
-                        .frame(width: 289, height: 29)
-                        .background(Color("TextField"))
-                        .clipShape(Capsule())
-                        .frame(width: 289, height: 29)
-                        .padding(.top, -25)
-                    Text(viewModel.passwordMessage)
-                        .font(.custom("Montserrat-semibold", size: 12))
-                        .frame(width: 289, height: 29)
-                        .foregroundColor(.red)
-                        .padding(.top, -25)
-                    
-                    Button(action: {}) {
-                        NavigationLink(isActive: $goToRoot, destination: {
-                            
-                            ContentView(viewModel: ContentViewViewModel(user: User()), goToRoot: $goToRoot)
-                            
-                        }, label: {
-                            Text("Sign in")
-                                .font(.custom("Montserrat", size: 15))
-                                .frame(width: 289, height: 46, alignment: .center)
-                                .foregroundColor(.white)
-                                .background(Color("Button"))
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                        })
+                    Section {
+                        Text("Sign in")
+                            .font(.custom("Montserrat-semibold", size: 30))
+                            .padding(.bottom, 50)
+                        TextField("Full name", text: $viewModel.fullName)
+                            .font(.custom("Montserrat", size: 12))
+                            .multilineTextAlignment(.center)
+                            .frame(width: 289, height: 29)
+                            .background(Color("TextField"))
+                            .clipShape(Capsule())
+                            .frame(width: 289, height: 29)
+                            .autocorrectionDisabled()
+                            .onDisappear {
+                                viewModel.fullName = ""
+                            }
+                        Text(viewModel.nameMessage)
+                            .font(.custom("Montserrat-semibold", size: 12))
+                            .frame(width: 289, height: 29)
+                            .foregroundColor(.red)
+                            .padding(.top, -25)
+                        TextField("Email", text: $viewModel.email)
+                            .font(.custom("Montserrat", size: 12))
+                            .multilineTextAlignment(.center)
+                            .frame(width: 289, height: 29)
+                            .background(Color("TextField"))
+                            .clipShape(Capsule())
+                            .frame(width: 289, height: 29)
+                            .padding(.top, -25)
+                            .autocorrectionDisabled()
+                            .onDisappear {
+                                viewModel.email = ""
+                            }
+                        Text(viewModel.emailMessage)
+                            .font(.custom("Montserrat-semibold", size: 12))
+                            .frame(width: 289, height: 29)
+                            .foregroundColor(.red)
+                            .padding(.top, -25)
+                        SecureField("Password", text: $viewModel.password)
+                            .font(.custom("Montserrat", size: 12))
+                            .multilineTextAlignment(.center)
+                            .frame(width: 289, height: 29)
+                            .background(Color("TextField"))
+                            .clipShape(Capsule())
+                            .frame(width: 289, height: 29)
+                            .padding(.top, -25)
+                            .onDisappear {
+                                viewModel.password = ""
+                            }
+                        Text(viewModel.passwordMessage)
+                            .font(.custom("Montserrat-semibold", size: 12))
+                            .frame(width: 289, height: 29)
+                            .foregroundColor(.red)
+                            .padding(.top, -25)
                     }
+                    NavigationLink(isActive: $viewModel.goToRootTwo) {
+                        ContentView(viewModel: ContentViewViewModel(user: User()), goToRoot: $viewModel.goToRootTwo)
+                    } label: {
+                        Text("Sign in")
+                            .font(.custom("Montserrat", size: 15))
+                            .frame(width: 289, height: 46, alignment: .center)
+                            .foregroundColor(.white)
+                            .background(Color("Button"))
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                    .disabled(!viewModel.isValid)
                     
                     HStack(spacing: 10) {
                         Text("Already have an account?")
                             .font(.custom("Montserrat", size: 12))
-                        NavigationLink(destination: LogInView(viewModel: LogInViewViewModel(), goToRoot: $goToRoot), isActive: $goToRoot) {
+                        NavigationLink(isActive: $viewModel.goToRoot) {
+                            LogInView(viewModel: LogInViewViewModel(), goToRoot: $viewModel.goToRoot)
+                        } label: {
                             Text("Log in")
                                 .font(.custom("Montserrat", size: 12))
                         }
@@ -120,6 +130,5 @@ struct SignInView: View {
             } .ignoresSafeArea(.all)
             
         }
-    }
 }
 
