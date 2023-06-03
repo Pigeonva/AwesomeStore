@@ -11,7 +11,9 @@ import SwiftUI
 struct AwesomeStoreApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                SignInView(viewModel: SignInViewModel())
+            }
         }
     }
 }
