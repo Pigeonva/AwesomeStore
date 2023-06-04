@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoritesView: View, SubviewProtocol {
+struct FavoritesView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
     

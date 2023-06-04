@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LikeView: View, SubviewProtocol {
+struct LikeView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
     

@@ -42,7 +42,7 @@ struct LogInView: View {
                     viewModel.getErrorMessage()
                 } label: {
                     NavigationLink(destination: {
-                        ContentView(viewModel: ContentViewViewModel(user: viewModel.user, goToRoot: $goToRoot, currentView: EmptyView()), goToRoot: $goToRoot)
+                        ContentView(viewModel: ContentViewViewModel(user: $viewModel.user, goToRoot: $goToRoot, currentView: EmptyView()))
                     }, label: {
                         Text("Log in")
                             .font(.custom("Montserrat", size: 15))
@@ -53,11 +53,10 @@ struct LogInView: View {
                     })
                     .disabled(!viewModel.isUserExist)
                 }
-
-
             }
         } .ignoresSafeArea(.all)
             .padding(.bottom, 120)
+            .background(Color("Background"))
             .navigationBarBackButtonHidden(true)
     }
 }

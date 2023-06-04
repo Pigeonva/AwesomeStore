@@ -9,16 +9,15 @@ import SwiftUI
 import Combine
 
 class ContentViewViewModel: ObservableObject {
-    var user: User
+    @Binding var user: User
     @Published var selected = 0 {
         didSet {
             currentView = defineView(number: selected)
         }
     }
     @Published var currentView: any View
-    
     @Binding var goToRoot: Bool
-    
+    @Published var location = ["Moscow", "Kazan", "Piter", "Sochi", "Volgograd", "Kaliningrad"]
     private lazy var isSelectedPublisher: AnyPublisher<any View, Never> = {
         $selected
             .map {
@@ -27,8 +26,8 @@ class ContentViewViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
-    init(user: User, goToRoot: Binding<Bool>, currentView: any View) {
-        self.user = user
+    init(user: Binding<User>, goToRoot: Binding<Bool>, currentView: any View) {
+        self._user = user
         self._goToRoot = goToRoot
         self.currentView = EmptyView()
         isSelectedPublisher

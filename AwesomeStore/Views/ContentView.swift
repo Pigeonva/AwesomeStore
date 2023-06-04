@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
-    @Binding var goToRoot: Bool
     
     var body: some View {
         ZStack {

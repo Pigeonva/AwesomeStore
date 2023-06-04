@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CartView: View, SubviewProtocol {
+struct CartView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
     

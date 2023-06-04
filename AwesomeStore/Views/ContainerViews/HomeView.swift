@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct HomeView: View, SubviewProtocol {
+struct HomeView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
-    let location = ["Moscow", "Kazan", "Piter"]
-    @State private var selectedCity = 0
     @State private var selectedCategory = 0
     @State var search = ""
     
@@ -26,9 +24,9 @@ struct HomeView: View, SubviewProtocol {
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(viewModel.user.fullName)")
-                        Picker("Location", selection: $selectedCity) {
-                            ForEach(0..<3) { city in
-                                Text("\(self.location[city])")
+                        Picker("Location", selection: $viewModel.user.cityIndex) {
+                            ForEach(0..<6) { city in
+                                Text("\(self.viewModel.location[city])")
                             }
                         }
                         .tint(.black)

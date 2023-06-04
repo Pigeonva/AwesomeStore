@@ -10,8 +10,12 @@ import Combine
 
 class SignInViewModel: ObservableObject {
     
-    var user = User()
-    var users = [User]() {
+    @Published var user = User() {
+        didSet {
+            users[user.email] = user
+        }
+    }
+    @Published var users = [String:User]() {
         didSet {
             let encoder = JSONEncoder()
             if let encoded = try? encoder.encode(users) {
@@ -78,8 +82,8 @@ class SignInViewModel: ObservableObject {
     }
     
     func checkUser(email: String) -> Bool {
-        for item in users {
-            if item.email == email {
+        for item in users.keys {
+            if item == email {
                 return false
             }
         }
@@ -89,14 +93,14 @@ class SignInViewModel: ObservableObject {
     func createUser() {
             if isValid {
                 self.user = User(fullName: fullName, email: email.lowercased(), password: password)
-                users.append(self.user)
+                users[user.email] = user
             }
     }
     
     func getUsers() {
         if let users = UserDefaults.standard.data(forKey: "Users") {
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([User].self, from: users) {
+            if let decoded = try? decoder.decode([String:User].self, from: users) {
                 self.users = decoded
             }
         }

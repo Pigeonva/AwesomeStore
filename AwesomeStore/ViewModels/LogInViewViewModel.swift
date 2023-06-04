@@ -9,8 +9,19 @@ import SwiftUI
 import Combine
 
 class LogInViewViewModel: ObservableObject {
-    @Published var user = User()
-    @Published var users = [User]()
+    @Published var user = User() {
+        didSet {
+            users[user.email] = user
+        }
+    }
+    @Published var users = [String:User]() {
+        didSet {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(users) {
+                UserDefaults.standard.set(encoded, forKey: "Users")
+            }
+        }
+    }
     
     @Published var email = ""
     @Published var password = ""
@@ -25,25 +36,26 @@ class LogInViewViewModel: ObservableObject {
     
     init() {
         getUsers()
-        
         isUserExistPublisher.assign(to: &$isUserExist)
     }
     
     func getUsers() {
         if let users = UserDefaults.standard.data(forKey: "Users") {
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([User].self, from: users) {
+            if let decoded = try? decoder.decode([String:User].self, from: users) {
                 self.users = decoded
             }
         }
     }
     
     func checkUser(email: String, password: String) -> Bool {
-        var counter = -1
         for i in users {
-            counter += 1
-            if i.email == email.lowercased() && i.password == password.lowercased() {
-                user = users[counter]
+            if i.key == email.lowercased() && i.value.password == password.lowercased() {
+                user = User(fullName: i.value.fullName,
+                            email: i.value.email,
+                            password: i.value.password,
+                            balance: i.value.balance,
+                            cityIndex: i.value.cityIndex)
                 return true
             }
         }

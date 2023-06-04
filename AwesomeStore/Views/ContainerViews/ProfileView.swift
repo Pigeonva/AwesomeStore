@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View, SubviewProtocol {
+struct ProfileView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
     @Binding var goToRoot: Bool
