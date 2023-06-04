@@ -12,7 +12,7 @@ struct AwesomeStoreApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                SignInView(viewModel: SignInViewModel())
+                SignInView()
             }
         }
     }

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    
+    @ObservedObject var viewModel: ContentViewViewModel
+    
     var body: some View {
         ZStack {
             Color("Background")
@@ -16,12 +19,11 @@ struct FavoritesView: View {
                     .font(.custom("Montserrat-semibold", size: 30))
                 ScrollView {
                     VStack(spacing: 15){
-                        LikeView()
-                        LikeView()
-                        LikeView()
-                        LikeView()
-                        LikeView()
-                        LikeView()
+                        LikeView(viewModel: self.viewModel)
+                        LikeView(viewModel: self.viewModel)
+                        LikeView(viewModel: self.viewModel)
+                        LikeView(viewModel: self.viewModel)
+                        LikeView(viewModel: self.viewModel)
                     }
                 }
             }
@@ -29,11 +31,5 @@ struct FavoritesView: View {
             .padding(.top, 50)
         }
         .ignoresSafeArea()
-    }
-}
-
-struct FavouriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoritesView()
     }
 }

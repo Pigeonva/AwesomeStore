@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LikeView: View {
+    
+    @ObservedObject var viewModel: ContentViewViewModel
+    
     var body: some View {
         HStack {
             Image(systemName: "clock")

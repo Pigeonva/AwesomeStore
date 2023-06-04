@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    let location = ["Moscow", "Kazan", "Piter"]
-    @State private var selectedCity = 0
+    @ObservedObject var viewModel: ContentViewViewModel
     @State private var selectedCategory = 0
     @State var search = ""
     
@@ -24,13 +23,10 @@ struct HomeView: View {
                         .padding(.bottom, 20)
                     Spacer()
                     VStack(alignment: .trailing) {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .clipShape(Circle())
-                        Picker("Location", selection: $selectedCity) {
-                            ForEach(0..<3) { city in
-                                Text("\(self.location[city])")
+                        Text("\(viewModel.user.fullName)")
+                        Picker("Location", selection: $viewModel.user.cityIndex) {
+                            ForEach(0..<6) { city in
+                                Text("\(self.viewModel.location[city])")
                             }
                         }
                         .tint(.black)
@@ -168,8 +164,3 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}

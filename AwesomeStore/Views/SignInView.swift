@@ -9,14 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @ObservedObject var viewModel: SignInViewModel
-    
-    
-    
-    init(viewModel: SignInViewModel) {
-        self.viewModel = viewModel
-    }
-    
+    @StateObject var viewModel = SignInViewModel()
     
     var body: some View {
             ZStack {
@@ -51,14 +44,22 @@ struct SignInView: View {
                             .frame(width: 289, height: 29)
                             .padding(.top, -25)
                             .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
                             .onDisappear {
                                 viewModel.email = ""
                             }
-                        Text(viewModel.emailMessage)
-                            .font(.custom("Montserrat-semibold", size: 12))
-                            .frame(width: 289, height: 29)
-                            .foregroundColor(.red)
-                            .padding(.top, -25)
+                        ZStack {
+                            Text(viewModel.userMessage)
+                                .font(.custom("Montserrat-semibold", size: 12))
+                                .frame(width: 289, height: 29)
+                                .foregroundColor(.red)
+                                .padding(.top, -25)
+                            Text(viewModel.emailMessage)
+                                .font(.custom("Montserrat-semibold", size: 12))
+                                .frame(width: 289, height: 29)
+                                .foregroundColor(.red)
+                                .padding(.top, -25)
+                            }
                         SecureField("Password", text: $viewModel.password)
                             .font(.custom("Montserrat", size: 12))
                             .multilineTextAlignment(.center)
@@ -76,23 +77,30 @@ struct SignInView: View {
                             .foregroundColor(.red)
                             .padding(.top, -25)
                     }
-                    NavigationLink(isActive: $viewModel.goToRootTwo) {
-                        ContentView(viewModel: ContentViewViewModel(user: User()), goToRoot: $viewModel.goToRootTwo)
+                    Button {
+                        viewModel.getErrorMessages()
                     } label: {
-                        Text("Sign in")
-                            .font(.custom("Montserrat", size: 15))
-                            .frame(width: 289, height: 46, alignment: .center)
-                            .foregroundColor(.white)
-                            .background(Color("Button"))
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        NavigationLink(isActive: $viewModel.goToRootTwo) {
+                            ContentView(viewModel: ContentViewViewModel(user: $viewModel.user, goToRoot: $viewModel.goToRootTwo, currentView: EmptyView()))
+                        } label: {
+                            Text("Sign in")
+                                .font(.custom("Montserrat", size: 15))
+                                .frame(width: 289, height: 46, alignment: .center)
+                                .foregroundColor(.white)
+                                .background(Color("Button"))
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                        }
+                        .simultaneousGesture(TapGesture().onEnded({ _ in
+                            viewModel.createUser()
+                        }))
+                        .disabled(!viewModel.isValid)
                     }
-                    .disabled(!viewModel.isValid)
-                    
+                        
                     HStack(spacing: 10) {
                         Text("Already have an account?")
                             .font(.custom("Montserrat", size: 12))
                         NavigationLink(isActive: $viewModel.goToRoot) {
-                            LogInView(viewModel: LogInViewViewModel(), goToRoot: $viewModel.goToRoot)
+                            LogInView(goToRoot: $viewModel.goToRoot)
                         } label: {
                             Text("Log in")
                                 .font(.custom("Montserrat", size: 12))
