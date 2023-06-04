@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LogInView: View {
     
-    @ObservedObject var viewModel: LogInViewViewModel
+    @StateObject var viewModel = LogInViewViewModel()
     @Binding var goToRoot: Bool
     
     var body: some View {
@@ -19,25 +19,30 @@ struct LogInView: View {
                 Text("Welcome back")
                     .font(.custom("Montserrat-semibold", size: 30))
                     .padding(.bottom, 50)
-                TextField("Email", text: $viewModel.user.email)
+                TextField("Email", text: $viewModel.email)
                     .font(.custom("Montserrat", size: 12))
                     .multilineTextAlignment(.center)
                     .frame(width: 289, height: 29)
                     .background(Color("TextField"))
                     .clipShape(Capsule())
                     .frame(width: 289, height: 29)
-                SecureField("Password", text: $viewModel.user.password)
+                SecureField("Password", text: $viewModel.password)
                     .font(.custom("Montserrat", size: 12))
                     .multilineTextAlignment(.center)
                     .frame(width: 289, height: 29)
                     .background(Color("TextField"))
                     .clipShape(Capsule())
                     .frame(width: 289, height: 29)
+                Text(viewModel.errorMessage)
+                    .font(.custom("Montserrat-semibold", size: 12))
+                    .frame(width: 289, height: 29)
+                    .foregroundColor(.red)
+                    .padding(.top, -25)
                 Button {
-                    //
+                    viewModel.getErrorMessage()
                 } label: {
                     NavigationLink(destination: {
-                        ContentView(viewModel: ContentViewViewModel(user: viewModel.user), goToRoot: $goToRoot)
+                        ContentView(viewModel: ContentViewViewModel(user: viewModel.user, goToRoot: $goToRoot, currentView: EmptyView()), goToRoot: $goToRoot)
                     }, label: {
                         Text("Log in")
                             .font(.custom("Montserrat", size: 15))
@@ -46,6 +51,7 @@ struct LogInView: View {
                             .background(Color("Button"))
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                     })
+                    .disabled(!viewModel.isUserExist)
                 }
 
 

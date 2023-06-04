@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct CartView: View {
+struct CartView: View, SubviewProtocol {
+    
+    @ObservedObject var viewModel: ContentViewViewModel
+    
     var body: some View {
         ZStack {
             Color("Background")
@@ -52,8 +55,3 @@ struct CartView: View {
     }
 }
 
-struct CartView_Previews: PreviewProvider {
-    static var previews: some View {
-        CartView()
-    }
-}

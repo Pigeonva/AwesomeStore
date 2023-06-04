@@ -14,16 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.selected == 0 {
-                 HomeView()
-            } else if viewModel.selected == 1 {
-                 FavoritesView()
-            }
-            else if viewModel.selected == 2 {
-                 CartView()
-            } else {
-                ProfileView(goToRoot: $goToRoot)
-            }
+            AnyView(viewModel.currentView)
             
             VStack {
                 Spacer()

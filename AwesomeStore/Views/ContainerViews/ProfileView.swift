@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfileView: View, SubviewProtocol {
     
+    @ObservedObject var viewModel: ContentViewViewModel
     @Binding var goToRoot: Bool
     
     var body: some View {
@@ -28,7 +29,7 @@ struct ProfileView: View {
                             .font(.custom("Montserrat", size: 10))
                     }
                     .padding(10)
-                    Text("Full Name")
+                    Text("\(viewModel.user.fullName)")
                         .font(.custom("Montserrat-semibold", size: 20))
                         .padding(20)
                 }
@@ -51,7 +52,7 @@ struct ProfileView: View {
                     HStack(spacing: 10) {
                         Image(systemName: "person.text.rectangle")
                             .foregroundColor(.black)
-                        Text("My balance: 5000$")
+                        Text("My balance: \(viewModel.user.balance)$")
                             .font(.custom("Montserrat", size: 15))
                             .foregroundColor(.black)
                         Spacer()

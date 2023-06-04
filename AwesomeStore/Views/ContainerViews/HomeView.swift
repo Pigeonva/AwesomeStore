@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct HomeView: View, SubviewProtocol {
     
+    @ObservedObject var viewModel: ContentViewViewModel
     let location = ["Moscow", "Kazan", "Piter"]
     @State private var selectedCity = 0
     @State private var selectedCategory = 0
@@ -24,10 +25,7 @@ struct HomeView: View {
                         .padding(.bottom, 20)
                     Spacer()
                     VStack(alignment: .trailing) {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .clipShape(Circle())
+                        Text("\(viewModel.user.fullName)")
                         Picker("Location", selection: $selectedCity) {
                             ForEach(0..<3) { city in
                                 Text("\(self.location[city])")
@@ -168,8 +166,3 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}

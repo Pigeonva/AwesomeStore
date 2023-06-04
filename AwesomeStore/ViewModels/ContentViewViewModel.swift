@@ -6,16 +6,46 @@
 //
 
 import SwiftUI
+import Combine
 
 class ContentViewViewModel: ObservableObject {
     var user: User
-    @Published var selected = 0
+    @Published var selected = 0 {
+        didSet {
+            currentView = defineView(number: selected)
+        }
+    }
+    @Published var currentView: any View
     
-    init(user: User) {
+    @Binding var goToRoot: Bool
+    
+    private lazy var isSelectedPublisher: AnyPublisher<any View, Never> = {
+        $selected
+            .map {
+                self.defineView(number: $0)
+            }
+            .eraseToAnyPublisher()
+    }()
+    
+    init(user: User, goToRoot: Binding<Bool>, currentView: any View) {
         self.user = user
+        self._goToRoot = goToRoot
+        self.currentView = EmptyView()
+        isSelectedPublisher
+            .assign(to: &$currentView)
     }
     
-    func goToLoginView() {
-        
+    func defineView(number: Int) -> any View {
+        switch number {
+        case 0:
+            return HomeView(viewModel: self)
+        case 1:
+            return FavoritesView(viewModel: self)
+        case 2:
+            return CartView(viewModel: self)
+        default:
+            return ProfileView(viewModel: self, goToRoot: $goToRoot)
+        }
     }
+    
 }

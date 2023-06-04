@@ -11,7 +11,14 @@ import Combine
 class SignInViewModel: ObservableObject {
     
     var user = User()
-    var users = [User]()
+    var users = [User]() {
+        didSet {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(users) {
+                UserDefaults.standard.set(encoded, forKey: "Users")
+            }
+        }
+    }
     
     @Published var fullName = ""
     @Published var email = ""
@@ -56,27 +63,9 @@ class SignInViewModel: ObservableObject {
     }()
 
     init() {
+        getUsers()
+        
         formIsValid.assign(to: &$isValid)
-        isNameLengthValidPublisher
-            .map {
-                $0 ? "" : "Needs to be at least 3 characters."
-            }
-            .assign(to: &$nameMessage)
-        isUserValidPublisher
-            .map {
-                $0 ? "" : "This email is already using."
-            }
-            .assign(to: &$userMessage)
-        isEmailValidPublisher
-            .map {
-                $0 ? "" : "Not valid email."
-            }
-            .assign(to: &$emailMessage)
-        isPasswordValidPublisher
-            .map {
-                $0 ? "" : "Needs to be 7 more symbols."
-            }
-            .assign(to: &$passwordMessage)
     }
     
     func textFieldValidatorEmail(_ string: String) -> Bool {
@@ -98,8 +87,42 @@ class SignInViewModel: ObservableObject {
     }
     
     func createUser() {
-        let user = User(fullName: fullName, email: email.lowercased(), password: password)
-        users.append(user)
+            if isValid {
+                self.user = User(fullName: fullName, email: email.lowercased(), password: password)
+                users.append(self.user)
+            }
+    }
+    
+    func getUsers() {
+        if let users = UserDefaults.standard.data(forKey: "Users") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([User].self, from: users) {
+                self.users = decoded
+            }
+        }
+    }
+    
+    func getErrorMessages() {
+        isNameLengthValidPublisher
+            .map {
+                $0 ? "" : "Needs to be at least 3 characters."
+            }
+            .assign(to: &$nameMessage)
+        isUserValidPublisher
+            .map {
+                $0 ? "" : "This email is already using."
+            }
+            .assign(to: &$userMessage)
+        isEmailValidPublisher
+            .map {
+                $0 ? "" : "Not valid email."
+            }
+            .assign(to: &$emailMessage)
+        isPasswordValidPublisher
+            .map {
+                $0 ? "" : "Needs to be 7 more symbols."
+            }
+            .assign(to: &$passwordMessage)
     }
 }
 

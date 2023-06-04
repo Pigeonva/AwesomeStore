@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct LikeView: View {
+struct LikeView: View, SubviewProtocol {
+    
+    @ObservedObject var viewModel: ContentViewViewModel
+    
     var body: some View {
         HStack {
             Image(systemName: "clock")
