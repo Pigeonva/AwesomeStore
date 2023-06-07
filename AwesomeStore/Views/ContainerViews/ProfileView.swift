@@ -21,14 +21,6 @@ struct ProfileView: View {
                         .resizable()
                         .frame(width: 60, height: 60)
                         .clipShape(Circle())
-                    Button {
-                        //
-                    } label: {
-                        Text("Change photo")
-                            .foregroundColor(.gray)
-                            .font(.custom("Montserrat", size: 10))
-                    }
-                    .padding(10)
                     Text("\(viewModel.user.fullName)")
                         .font(.custom("Montserrat-semibold", size: 20))
                         .padding(20)

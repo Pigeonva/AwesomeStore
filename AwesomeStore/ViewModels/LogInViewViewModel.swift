@@ -22,19 +22,20 @@ class LogInViewViewModel: ObservableObject {
             }
         }
     }
-    
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
     @Published var isUserExist = false
+    @Binding var goToRoot: Bool
     
     private lazy var isUserExistPublisher: AnyPublisher<Bool, Never> = {
         Publishers.CombineLatest($email, $password)
             .map {self.checkUser(email: $0, password: $1) }
-    .eraseToAnyPublisher()
+            .eraseToAnyPublisher()
     }()
     
-    init() {
+    init(goToRoot: Binding<Bool>) {
+        self._goToRoot = goToRoot
         getUsers()
         isUserExistPublisher.assign(to: &$isUserExist)
     }

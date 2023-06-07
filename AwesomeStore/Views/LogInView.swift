@@ -9,8 +9,9 @@ import SwiftUI
 
 struct LogInView: View {
     
-    @StateObject var viewModel = LogInViewViewModel()
-    @Binding var goToRoot: Bool
+    @Environment(\.dismiss) private var dismiss
+    
+    @ObservedObject var viewModel: LogInViewViewModel
     
     var body: some View {
         ZStack {
@@ -19,20 +20,30 @@ struct LogInView: View {
                 Text("Welcome back")
                     .font(.custom("Montserrat-semibold", size: 30))
                     .padding(.bottom, 50)
-                TextField("Email", text: $viewModel.email)
-                    .font(.custom("Montserrat", size: 12))
+                TextField("", text: $viewModel.email)
+                    .font(.custom("Montserrat", size: 15))
+                    .placeholder(when: viewModel.email.isEmpty, placeholder: {
+                        Text("Email")
+                            .foregroundColor(.gray)
+                            .font(.custom("Montserrat", size: 15))
+                    })
                     .multilineTextAlignment(.center)
-                    .frame(width: 289, height: 29)
+                    .keyboardType(.URL)
+                    .frame(width: 289, height: 44)
                     .background(Color("TextField"))
                     .clipShape(Capsule())
-                    .frame(width: 289, height: 29)
-                SecureField("Password", text: $viewModel.password)
-                    .font(.custom("Montserrat", size: 12))
+                    .textInputAutocapitalization(.never)
+                SecureField("", text: $viewModel.password)
+                    .font(.custom("Montserrat", size: 15))
+                    .placeholder(when: viewModel.email.isEmpty, placeholder: {
+                        Text("Password")
+                            .foregroundColor(.gray)
+                            .font(.custom("Montserrat", size: 15))
+                    })
                     .multilineTextAlignment(.center)
-                    .frame(width: 289, height: 29)
+                    .frame(width: 289, height: 44)
                     .background(Color("TextField"))
                     .clipShape(Capsule())
-                    .frame(width: 289, height: 29)
                 Text(viewModel.errorMessage)
                     .font(.custom("Montserrat-semibold", size: 12))
                     .frame(width: 289, height: 29)
@@ -42,7 +53,9 @@ struct LogInView: View {
                     viewModel.getErrorMessage()
                 } label: {
                     NavigationLink(destination: {
-                        ContentView(viewModel: ContentViewViewModel(user: $viewModel.user, goToRoot: $goToRoot, currentView: EmptyView()))
+                        ContentView(viewModel: ContentViewViewModel(user: $viewModel.user,
+                                                                    goToRoot: $viewModel.goToRoot,
+                                                                    currentView: EmptyView()))
                     }, label: {
                         Text("Log in")
                             .font(.custom("Montserrat", size: 15))
@@ -54,9 +67,25 @@ struct LogInView: View {
                     .disabled(!viewModel.isUserExist)
                 }
             }
-        } .ignoresSafeArea(.all)
-            .padding(.bottom, 120)
-            .background(Color("Background"))
-            .navigationBarBackButtonHidden(true)
+        }
+        .ignoresSafeArea(.all)
+        .padding(.bottom, 120)
+        .background(Color("Background"))
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(Color("TextColor"))
+                        Text("Back")
+                            .font(.custom("Montserrat", size: 20))
+                            .foregroundColor(Color("TextColor"))
+                    }
+                }
+            }
+        }
     }
 }

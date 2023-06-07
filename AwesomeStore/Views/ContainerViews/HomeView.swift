@@ -25,7 +25,7 @@ struct HomeView: View {
                     VStack(alignment: .trailing) {
                         Text("\(viewModel.user.fullName)")
                         Picker("Location", selection: $viewModel.user.cityIndex) {
-                            ForEach(0..<6) { city in
+                            ForEach(0..<7) { city in
                                 Text("\(self.viewModel.location[city])")
                             }
                         }

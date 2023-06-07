@@ -37,7 +37,6 @@ struct LikeView: View {
                 }
                 Spacer()
             }
-
         }
     }
 }

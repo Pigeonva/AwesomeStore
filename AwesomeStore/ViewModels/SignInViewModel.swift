@@ -23,7 +23,6 @@ class SignInViewModel: ObservableObject {
             }
         }
     }
-    
     @Published var fullName = ""
     @Published var email = ""
     @Published var password = ""
@@ -36,28 +35,28 @@ class SignInViewModel: ObservableObject {
     @Published var goToRootTwo = false
     
     private lazy var isNameLengthValidPublisher: AnyPublisher<Bool, Never> = {
-    $fullName
-    .map { $0.count >= 3 }
-    .eraseToAnyPublisher()
+        $fullName
+            .map { $0.count >= 3 }
+            .eraseToAnyPublisher()
     }()
     
     private lazy var isEmailValidPublisher: AnyPublisher<Bool, Never> = {
-    $email
+        $email
             .map { self.textFieldValidatorEmail($0) }
-    .eraseToAnyPublisher()
+            .eraseToAnyPublisher()
     }()
     
     private lazy var isUserValidPublisher: AnyPublisher<Bool, Never> = {
-    $email
+        $email
             .map { $0.lowercased()}
             .map { self.checkUser(email: $0) }
-    .eraseToAnyPublisher()
+            .eraseToAnyPublisher()
     }()
     
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
-    $password
-    .map { $0.count >= 8 }
-    .eraseToAnyPublisher()
+        $password
+            .map { $0.count >= 8 }
+            .eraseToAnyPublisher()
     }()
     
     private lazy var formIsValid: AnyPublisher<Bool, Never> = {
@@ -65,7 +64,7 @@ class SignInViewModel: ObservableObject {
             .map {$0 && $1 && $2 && $3}
             .eraseToAnyPublisher()
     }()
-
+    
     init() {
         getUsers()
         
@@ -91,10 +90,12 @@ class SignInViewModel: ObservableObject {
     }
     
     func createUser() {
-            if isValid {
-                self.user = User(fullName: fullName, email: email.lowercased(), password: password)
-                users[user.email] = user
-            }
+        if isValid {
+            self.user = User(fullName: fullName,
+                             email: email.lowercased(),
+                             password: password)
+            users[user.email] = user
+        }
     }
     
     func getUsers() {

@@ -23,7 +23,6 @@ struct CartView: View {
                     Spacer()
                 }
             }
-            
             VStack {
                 Spacer()
                 VStack {
@@ -46,7 +45,6 @@ struct CartView: View {
                             .background(.blue)
                             .cornerRadius(10)
                     }
-
                 }
                 .padding(.bottom, 100)
             }

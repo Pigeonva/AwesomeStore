@@ -10,12 +10,12 @@ import SwiftUI
 struct CartElementView: View {
     var body: some View {
         HStack(spacing: 15) {
-                Image(systemName: "clock")
-                    .resizable()
-                    .foregroundColor(.clear)
-                    .frame(width: 150, height: 200)
-                    .background(.yellow)
-                    .cornerRadius(20)
+            Image(systemName: "clock")
+                .resizable()
+                .foregroundColor(.clear)
+                .frame(width: 150, height: 200)
+                .background(.yellow)
+                .cornerRadius(20)
             VStack {
                 HStack {
                     Spacer()

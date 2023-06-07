@@ -17,7 +17,13 @@ class ContentViewViewModel: ObservableObject {
     }
     @Published var currentView: any View
     @Binding var goToRoot: Bool
-    @Published var location = ["Moscow", "Kazan", "Piter", "Sochi", "Volgograd", "Kaliningrad"]
+    @Published var location = ["Moscow",
+                               "Kazan",
+                               "Piter",
+                               "Sochi",
+                               "Volgograd",
+                               "Kaliningrad",
+                               "Orenburg"]
     private lazy var isSelectedPublisher: AnyPublisher<any View, Never> = {
         $selected
             .map {
