@@ -25,7 +25,7 @@ struct HomeView: View {
                     VStack(alignment: .trailing) {
                         Text("\(viewModel.user.fullName)")
                         Picker("Location", selection: $viewModel.user.cityIndex) {
-                            ForEach(0..<7) { city in
+                            ForEach(0..<viewModel.location.count, id: \.self) { city in
                                 Text("\(self.viewModel.location[city])")
                             }
                         }
@@ -44,12 +44,13 @@ struct HomeView: View {
                     VStack(spacing: 1){
                         Button {
                             self.selectedCategory = 1
+                            print(viewModel.flashProducts[0].name)
                         } label: {
                             Image(systemName: "iphone.rear.camera")
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 1 ? .gray : .clear)
+                                .background(selectedCategory == 1 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Phones")
@@ -64,7 +65,7 @@ struct HomeView: View {
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 2 ? .gray : .clear)
+                                .background(selectedCategory == 2 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Games")
@@ -79,7 +80,7 @@ struct HomeView: View {
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 3 ? .gray : .clear)
+                                .background(selectedCategory == 3 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Cars")
@@ -94,7 +95,7 @@ struct HomeView: View {
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 4 ? .gray : .clear)
+                                .background(selectedCategory == 4 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Kids")
@@ -123,9 +124,9 @@ struct HomeView: View {
                         .padding(.top, 30)
                         ScrollView(.horizontal) {
                             HStack(spacing: 15) {
-                                LatestView()
-                                LatestView()
-                                LatestView()
+                                ForEach(viewModel.latestProducts, id: \.self) { product in
+                                    LatestView(category: product.category, name: product.name, price: product.price, imageUrl: product.image_url)
+                                }
                             }
                         }
                         .padding(.leading, 10)
@@ -148,8 +149,9 @@ struct HomeView: View {
                         .padding(.top, 30)
                         ScrollView(.horizontal) {
                             HStack(spacing: 15) {
-                                FlashView()
-                                FlashView()
+                                ForEach(viewModel.flashProducts, id: \.self) { product in
+                                    FlashView(category: product.category, name: product.name, price: product.price, discount: product.discount, imageUrl: product.image_url)
+                                }
                             }
                         }
                         .padding(.leading, 10)

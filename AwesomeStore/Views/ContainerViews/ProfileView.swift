@@ -10,7 +10,6 @@ import SwiftUI
 struct ProfileView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
-    @Binding var goToRoot: Bool
     
     var body: some View {
         ZStack {
@@ -48,8 +47,6 @@ struct ProfileView: View {
                             .font(.custom("Montserrat", size: 15))
                             .foregroundColor(.black)
                         Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.black)
                     }
                     .padding(.horizontal, 50)
                     Button {
@@ -98,7 +95,7 @@ struct ProfileView: View {
                         .padding(.horizontal, 50)
                     }
                     Button {
-                        goToRoot = false
+                        viewModel.goToRoot = false
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "door.right.hand.open")

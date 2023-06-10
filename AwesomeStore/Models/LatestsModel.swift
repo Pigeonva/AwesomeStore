@@ -8,12 +8,12 @@
 import Foundation
 
 struct LatestsModel: Codable {
-    let latest: [Latest]
+    var latest: [Latest]
 }
 
-struct Latest: Codable {
-    let category: String
-    let name: String
-    let price: Int
-    let image_url: String
+struct Latest: Codable, Hashable {
+    var category: String = ""
+    var name: String = ""
+    var price: Int = 0
+    var image_url: String = ""
 }

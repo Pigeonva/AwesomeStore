@@ -22,8 +22,8 @@ class LogInViewViewModel: ObservableObject {
             }
         }
     }
-    @Published var email = ""
-    @Published var password = ""
+    @Published var email = "q@q.q"
+    @Published var password = "qqqqqqqq"
     @Published var errorMessage = ""
     @Published var isUserExist = false
     @Binding var goToRoot: Bool

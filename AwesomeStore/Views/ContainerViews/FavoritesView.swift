@@ -19,11 +19,7 @@ struct FavoritesView: View {
                     .font(.custom("Montserrat-semibold", size: 30))
                 ScrollView {
                     VStack(spacing: 15){
-                        LikeView(viewModel: self.viewModel)
-                        LikeView(viewModel: self.viewModel)
-                        LikeView(viewModel: self.viewModel)
-                        LikeView(viewModel: self.viewModel)
-                        LikeView(viewModel: self.viewModel)
+                        LikeView()
                     }
                 }
             }

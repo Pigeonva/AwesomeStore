@@ -53,9 +53,7 @@ struct LogInView: View {
                     viewModel.getErrorMessage()
                 } label: {
                     NavigationLink(destination: {
-                        ContentView(viewModel: ContentViewViewModel(user: $viewModel.user,
-                                                                    goToRoot: $viewModel.goToRoot,
-                                                                    currentView: EmptyView()))
+                        ContentView(viewModel: ContentViewViewModel(user: $viewModel.user, goToRoot: $viewModel.goToRoot))
                     }, label: {
                         Text("Log in")
                             .font(.custom("Montserrat", size: 15))

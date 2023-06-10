@@ -9,48 +9,37 @@ import SwiftUI
 import Combine
 
 class ContentViewViewModel: ObservableObject {
-    @Binding var user: User
-    @Published var selected = 0 {
-        didSet {
-            currentView = defineView(number: selected)
-        }
-    }
-    @Published var currentView: any View
+    
+    @ObservedObject var networkManager = NetworkManager()
     @Binding var goToRoot: Bool
-    @Published var location = ["Moscow",
-                               "Kazan",
-                               "Piter",
-                               "Sochi",
-                               "Volgograd",
-                               "Kaliningrad",
-                               "Orenburg"]
-    private lazy var isSelectedPublisher: AnyPublisher<any View, Never> = {
-        $selected
-            .map {
-                self.defineView(number: $0)
-            }
+    
+    @Published var selection = "home"
+    @Published var tabSelection: TabBarItem = .home
+    
+    @Binding var user: User
+    @Published var selected = 0
+    @Published var location = ["Moscow", "Kazan", "Piter", "Sochi", "Volgograd", "Kaliningrad", "Orenburg"]
+    @Published var latestProducts = [Latest()]
+    @Published var flashProducts = [Flash()]
+    
+    lazy private var getLatestProducts: AnyPublisher<[Latest], Never> = {
+        networkManager.getLatestProducts()
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }()
     
-    init(user: Binding<User>, goToRoot: Binding<Bool>, currentView: any View) {
+    lazy private var getFlashProducts: AnyPublisher<[Flash], Never> = {
+        networkManager.getFlashProducts()
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }()
+    
+    init(user: Binding<User>, goToRoot: Binding<Bool>) {
         self._user = user
         self._goToRoot = goToRoot
-        self.currentView = EmptyView()
-        isSelectedPublisher
-            .assign(to: &$currentView)
+        getLatestProducts
+            .assign(to: &$latestProducts)
+        getFlashProducts
+            .assign(to: &$flashProducts)
     }
-    
-    func defineView(number: Int) -> any View {
-        switch number {
-        case 0:
-            return HomeView(viewModel: self)
-        case 1:
-            return FavoritesView(viewModel: self)
-        case 2:
-            return CartView(viewModel: self)
-        default:
-            return ProfileView(viewModel: self, goToRoot: $goToRoot)
-        }
-    }
-    
 }
