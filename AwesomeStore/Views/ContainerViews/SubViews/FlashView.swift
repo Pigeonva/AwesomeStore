@@ -23,27 +23,26 @@ struct FlashView: View {
             }, placeholder: {
                 Color.blue.opacity(0.5)
             })
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .frame(width: 200, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            VStack {
+                Text("\(category)")
+                    .padding(5)
+                    .background(.blue.opacity(0.5))
+                    .clipShape(Capsule())
+                    .font(.custom("Montserrat-semibold", size: 12))
+                Text("\(name)")
+                    .font(.custom("Montserrat-semibold", size: 12))
+                Text("\(String(format: "%.1f", price))$")
+                    .font(.custom("Montserrat-semibold", size: 12))
+            }
             HStack {
-                VStack {
-                    Spacer()
-                    Text("\(category)")
-                        .padding(5)
-                        .background(.blue.opacity(0.5))
-                        .clipShape(Capsule())
-                        .font(.custom("Montserrat-semibold", size: 12))
-                    Text("\(name)")
-                        .font(.custom("Montserrat-semibold", size: 12))
-                    Text("\(String(format: "%.1f", price))$")
-                        .font(.custom("Montserrat-semibold", size: 12))
-                    Text("-\(discount)%")
-                        .padding(5)
-                        .background(.red.opacity(0.5))
-                        .clipShape(Capsule())
-                        .font(.custom("Montserrat-semibold", size: 12))
-                }
+                Text("-\(discount)%")
+                    .padding(5)
+                    .background(.red.opacity(0.5))
+                    .clipShape(Capsule())
+                    .font(.custom("Montserrat-semibold", size: 12))
                 Spacer()
                 VStack {
                     Spacer()
@@ -61,12 +60,9 @@ struct FlashView: View {
                                 .foregroundColor(.black)
                         }
                     }
-                }
-                
-            }
-            .padding(.horizontal, 5)
+                }}
         }
-        .frame(width: 200, height: 310)
+        .padding(.horizontal, 20)
     }
 }
 

@@ -22,9 +22,12 @@ class ContentViewViewModel: ObservableObject {
     @Published var cityIndex = 0
     @Published var latestProducts = [Product]()
     @Published var flashProducts = [Product]()
-    lazy var allProducts: [Product] = {
-        let products = latestProducts + flashProducts
-        return products
+    lazy var allProducts: [String : Product] = {
+//        let products = latestProducts + flashProducts
+//        return products
+        var amount = latestProducts + flashProducts
+        var dict = Dictionary(uniqueKeysWithValues: zip(amount.map{$0.name}, amount))
+        return dict
     }()
     
     lazy private var getLatestProducts: AnyPublisher<[Product], Never> = {

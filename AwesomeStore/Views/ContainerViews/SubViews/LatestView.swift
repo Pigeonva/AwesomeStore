@@ -22,7 +22,7 @@ struct LatestView: View {
             }, placeholder: {
                 Color.blue.opacity(0.5)
             })
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .frame(width: 150, height: 150)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             HStack {
@@ -56,6 +56,5 @@ struct LatestView: View {
             .padding(.horizontal, 2)
             .padding(.bottom, 10)
         }
-        .frame(width: 150, height: 210)
     }
 }
