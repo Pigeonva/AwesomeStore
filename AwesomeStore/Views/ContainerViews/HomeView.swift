@@ -24,7 +24,7 @@ struct HomeView: View {
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(viewModel.user.fullName)")
-                        Picker("Location", selection: $viewModel.user.cityIndex) {
+                        Picker("Location", selection: $viewModel.cityIndex) {
                             ForEach(0..<viewModel.location.count, id: \.self) { city in
                                 Text("\(self.viewModel.location[city])")
                             }
@@ -44,7 +44,6 @@ struct HomeView: View {
                     VStack(spacing: 1){
                         Button {
                             self.selectedCategory = 1
-                            print(viewModel.flashProducts[0].name)
                         } label: {
                             Image(systemName: "iphone.rear.camera")
                                 .padding(10)
@@ -111,14 +110,6 @@ struct HomeView: View {
                             Text("Latest")
                                 .font(.custom("Montserrat-semibold", size: 20))
                             Spacer()
-                            Button {
-                                //
-                            } label: {
-                                Text("View all")
-                                    .font(.custom("Montserrat", size: 15))
-                                    .foregroundColor(.black)
-                            }
-                            
                         }
                         .padding(.horizontal, 30)
                         .padding(.top, 30)
@@ -129,7 +120,7 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        .padding(.leading, 10)
+                        .padding(.horizontal, 20)
                     }
                     
                     VStack(spacing: 5) {
@@ -137,24 +128,17 @@ struct HomeView: View {
                             Text("Flash sale")
                                 .font(.custom("Montserrat-semibold", size: 25))
                             Spacer()
-                            Button {
-                                //
-                            } label: {
-                                Text("View all")
-                                    .font(.custom("Montserrat", size: 15))
-                                    .foregroundColor(.black)
-                            }
                         }
                         .padding(.horizontal, 30)
                         .padding(.top, 30)
                         ScrollView(.horizontal) {
                             HStack(spacing: 15) {
                                 ForEach(viewModel.flashProducts, id: \.self) { product in
-                                    FlashView(category: product.category, name: product.name, price: product.price, discount: product.discount, imageUrl: product.image_url)
+                                    FlashView(category: product.category, name: product.name, price: product.price, discount: product.discount ?? 0, imageUrl: product.image_url)
                                 }
                             }
                         }
-                        .padding(.leading, 10)
+                        .padding(.leading, 20)
                     }
                     Spacer()
                 }

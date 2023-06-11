@@ -19,16 +19,21 @@ class ContentViewViewModel: ObservableObject {
     @Binding var user: User
     @Published var selected = 0
     @Published var location = ["Moscow", "Kazan", "Piter", "Sochi", "Volgograd", "Kaliningrad", "Orenburg"]
-    @Published var latestProducts = [Latest()]
-    @Published var flashProducts = [Flash()]
+    @Published var cityIndex = 0
+    @Published var latestProducts = [Product]()
+    @Published var flashProducts = [Product]()
+    lazy var allProducts: [Product] = {
+        let products = latestProducts + flashProducts
+        return products
+    }()
     
-    lazy private var getLatestProducts: AnyPublisher<[Latest], Never> = {
+    lazy private var getLatestProducts: AnyPublisher<[Product], Never> = {
         networkManager.getLatestProducts()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }()
     
-    lazy private var getFlashProducts: AnyPublisher<[Flash], Never> = {
+    lazy private var getFlashProducts: AnyPublisher<[Product], Never> = {
         networkManager.getFlashProducts()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

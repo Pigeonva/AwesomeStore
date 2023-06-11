@@ -55,8 +55,7 @@ class LogInViewViewModel: ObservableObject {
                 user = User(fullName: i.value.fullName,
                             email: i.value.email,
                             password: i.value.password,
-                            balance: i.value.balance,
-                            cityIndex: i.value.cityIndex)
+                            balance: i.value.balance)
                 return true
             }
         }

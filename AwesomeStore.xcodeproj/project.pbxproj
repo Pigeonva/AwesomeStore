@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351816402A35D35F00FFA9E8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3518163F2A35D35F00FFA9E8 /* Product.swift */; };
 		352FBE8C29F8FCF900E0D8BA /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FBE8B29F8FCF900E0D8BA /* CartView.swift */; };
 		352FBE8E29F8FE2600E0D8BA /* CartElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FBE8D29F8FE2600E0D8BA /* CartElementView.swift */; };
 		352FBE9229F918F300E0D8BA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FBE9129F918F300E0D8BA /* User.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3518163F2A35D35F00FFA9E8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		352FBE8B29F8FCF900E0D8BA /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		352FBE8D29F8FE2600E0D8BA /* CartElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartElementView.swift; sourceTree = "<group>"; };
 		352FBE9129F918F300E0D8BA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				352FBE9129F918F300E0D8BA /* User.swift */,
 				3544D38A2A3125FA00FCE6DF /* LatestsModel.swift */,
 				35C9051E2A34F2FA00BEB049 /* FlashModel.swift */,
+				3518163F2A35D35F00FFA9E8 /* Product.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				352FBEBD29F9317700E0D8BA /* LogInViewViewModel.swift in Sources */,
 				3544D3862A31149800FCE6DF /* View+extension.swift in Sources */,
 				35832E6529F7FD5A0000B38E /* ProfileView.swift in Sources */,
+				351816402A35D35F00FFA9E8 /* Product.swift in Sources */,
 				35832E6B29F85D890000B38E /* LatestView.swift in Sources */,
 				35832E6729F80A350000B38E /* HomeView.swift in Sources */,
 				35832E6229F7F3EB0000B38E /* ContentView.swift in Sources */,

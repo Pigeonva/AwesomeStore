@@ -16,15 +16,15 @@ struct FlashView: View {
     @State var imageUrl: String = ""
     
     var body: some View {
-        ZStack {
+        VStack {
             AsyncImage(url: URL(string: imageUrl), scale: 1, content: { image in
                 image
                     .resizable()
             }, placeholder: {
-                Color.yellow
+                Color.blue.opacity(0.5)
             })
             .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 200)
+            .frame(width: 200, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             HStack {
                 VStack {
@@ -36,9 +36,8 @@ struct FlashView: View {
                         .font(.custom("Montserrat-semibold", size: 12))
                     Text("\(name)")
                         .font(.custom("Montserrat-semibold", size: 12))
-                    Text("\(price)$")
+                    Text("\(String(format: "%.1f", price))$")
                         .font(.custom("Montserrat-semibold", size: 12))
-                        .padding(.top, 8)
                     Text("-\(discount)%")
                         .padding(5)
                         .background(.red.opacity(0.5))
@@ -66,9 +65,8 @@ struct FlashView: View {
                 
             }
             .padding(.horizontal, 5)
-            .padding(.bottom, 10)
         }
-        .frame(width: 200, height: 300)
+        .frame(width: 200, height: 310)
     }
 }
 

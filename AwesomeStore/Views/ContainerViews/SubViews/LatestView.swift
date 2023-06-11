@@ -11,7 +11,7 @@ struct LatestView: View {
     
     @State var category: String = ""
     @State var name: String = ""
-    @State var price: Int = 0
+    @State var price: Double = 0.0
     @State var imageUrl: String = ""
     
     var body: some View {
@@ -20,10 +20,10 @@ struct LatestView: View {
                 image
                     .resizable()
             }, placeholder: {
-                Color.yellow
+                Color.blue.opacity(0.5)
             })
             .aspectRatio(contentMode: .fill)
-            .frame(width: 100, height: 150)
+            .frame(width: 150, height: 150)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             HStack {
                 VStack {
@@ -37,7 +37,7 @@ struct LatestView: View {
                     Text("\(name)")
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
-                    Text("\(price)$")
+                    Text("\(String(format: "%.1f", price))$")
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
                 }
@@ -56,6 +56,6 @@ struct LatestView: View {
             .padding(.horizontal, 2)
             .padding(.bottom, 10)
         }
-        .frame(width: 150, height: 250)
+        .frame(width: 150, height: 210)
     }
 }
