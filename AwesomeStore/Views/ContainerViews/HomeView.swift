@@ -10,8 +10,6 @@ import SwiftUI
 struct HomeView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
-    @State private var selectedCategory = 0
-    @State var search = ""
     
     var body: some View {
         ZStack{
@@ -33,7 +31,7 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                TextField("What are you looking for?", text: $search)
+                TextField("What are you looking for?", text: $viewModel.searchTextField)
                     .font(.custom("Montserrat", size: 12))
                     .multilineTextAlignment(.center)
                     .frame(width: 289, height: 29)
@@ -43,13 +41,14 @@ struct HomeView: View {
                 HStack {
                     VStack(spacing: 1){
                         Button {
-                            self.selectedCategory = 1
+                            viewModel.visabilityIndex = 2
+                            
                         } label: {
                             Image(systemName: "iphone.rear.camera")
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 1 ? .blue.opacity(0.3) : .clear)
+                                .background(viewModel.visabilityIndex == 2 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Phones")
@@ -58,13 +57,13 @@ struct HomeView: View {
                     Spacer()
                     VStack(spacing: 1){
                         Button {
-                            self.selectedCategory = 2
+                            viewModel.visabilityIndex = 3
                         } label: {
                             Image(systemName: "gamecontroller")
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 2 ? .blue.opacity(0.3) : .clear)
+                                .background(viewModel.visabilityIndex == 3 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Games")
@@ -73,13 +72,13 @@ struct HomeView: View {
                     Spacer()
                     VStack(spacing: 1){
                         Button {
-                            self.selectedCategory = 3
+                            viewModel.visabilityIndex = 4
                         } label: {
                             Image(systemName: "car")
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 3 ? .blue.opacity(0.3) : .clear)
+                                .background(viewModel.visabilityIndex == 4 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Cars")
@@ -88,13 +87,13 @@ struct HomeView: View {
                     Spacer()
                     VStack(spacing: 1){
                         Button {
-                            self.selectedCategory = 4
+                            viewModel.visabilityIndex = 5
                         } label: {
                             Image(systemName: "soccerball")
                                 .padding(10)
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
-                                .background(selectedCategory == 4 ? .blue.opacity(0.3) : .clear)
+                                .background(viewModel.visabilityIndex == 5 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
                         Text("Kids")
@@ -103,44 +102,62 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 50)
                 .padding(.top, 20)
-                
-                ScrollView{
-                    VStack(spacing: 5) {
-                        HStack {
-                            Text("Latest")
-                                .font(.custom("Montserrat-semibold", size: 20))
-                            Spacer()
-                        }
-                        .padding(.horizontal, 30)
-                        .padding(.top, 30)
-                        ScrollView(.horizontal) {
-                            HStack(spacing: 15) {
-                                ForEach(viewModel.latestProducts, id: \.self) { product in
-                                    LatestView(category: product.category, name: product.name, price: product.price, imageUrl: product.image_url)
+                if viewModel.visabilityIndex == 0 {
+                    ScrollView{
+                        VStack(spacing: 5) {
+                            HStack {
+                                Text("Latest")
+                                    .font(.custom("Montserrat-semibold", size: 20))
+                                Spacer()
+                            }
+                            .padding(.horizontal, 30)
+                            .padding(.top, 30)
+                            ScrollView(.horizontal) {
+                                HStack(spacing: 15) {
+                                    ForEach(viewModel.latestProducts, id: \.self) { product in
+                                        LatestView(category: product.category, name: product.name, price: product.price, imageUrl: product.image_url)
+                                    }
                                 }
                             }
+                            .padding(.horizontal, 20)
                         }
-                        .padding(.horizontal, 20)
-                    }
-                    
-                    VStack(spacing: 5) {
-                        HStack {
-                            Text("Flash sale")
-                                .font(.custom("Montserrat-semibold", size: 25))
-                            Spacer()
-                        }
-                        .padding(.horizontal, 30)
-                        .padding(.top, 30)
-                        ScrollView(.horizontal) {
-                            HStack(spacing: 15) {
-                                ForEach(viewModel.flashProducts, id: \.self) { product in
-                                    FlashView(category: product.category, name: product.name, price: product.price, discount: product.discount ?? 0, imageUrl: product.image_url)
+                        
+                        VStack(spacing: 5) {
+                            HStack {
+                                Text("Flash sale")
+                                    .font(.custom("Montserrat-semibold", size: 25))
+                                Spacer()
+                            }
+                            .padding(.horizontal, 30)
+                            .padding(.top, 30)
+                            ScrollView(.horizontal) {
+                                HStack(spacing: 15) {
+                                    ForEach(viewModel.flashProducts, id: \.self) { product in
+                                        FlashView(category: product.category, name: product.name, price: product.price, discount: product.discount ?? 0, imageUrl: product.image_url)
+                                    }
                                 }
                             }
+                            .padding(.leading, 20)
                         }
-                        .padding(.leading, 20)
+                        Spacer()
                     }
-                    Spacer()
+                }
+                if viewModel.visabilityIndex == 1 {
+                        List {
+                            ForEach($viewModel.containerArray, id: \.self) { $product in
+                                ProductView(name: product.name, price: product.price, imageUrl: product.image_url)
+                            }
+                        }
+                        .onChange(of: viewModel.searchTextField) { newValue in
+                            viewModel.searchByWord(term: newValue)
+                        }
+                }
+                if viewModel.visabilityIndex == 2 || viewModel.visabilityIndex == 3 || viewModel.visabilityIndex == 4 || viewModel.visabilityIndex == 5 {
+                    List {
+                        ForEach($viewModel.categoryArray, id: \.self) { $product in
+                            ProductView(name: product.name, price: product.price, imageUrl: product.image_url)
+                        }
+                    }
                 }
                 Spacer(minLength: 100)
             }
