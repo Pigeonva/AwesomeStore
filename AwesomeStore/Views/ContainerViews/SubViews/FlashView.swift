@@ -9,15 +9,13 @@ import SwiftUI
 
 struct FlashView: View {
     
-    @State var category: String = ""
-    @State var name: String = ""
-    @State var price: Double = 0.0
-    @State var discount: Int = 0
-    @State var imageUrl: String = ""
+    @ObservedObject var viewModel: ContentViewViewModel
+    @Binding var favouriteProducts: [Product]
+    @State var flashProduct = Product()
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: imageUrl), scale: 1, content: { image in
+            AsyncImage(url: URL(string: flashProduct.image_url), scale: 1, content: { image in
                 image
                     .resizable()
             }, placeholder: {
@@ -27,18 +25,18 @@ struct FlashView: View {
             .frame(width: 200, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             VStack {
-                Text("\(category)")
+                Text("\(flashProduct.category)")
                     .padding(5)
                     .background(.blue.opacity(0.5))
                     .clipShape(Capsule())
                     .font(.custom("Montserrat-semibold", size: 12))
-                Text("\(name)")
+                Text("\(flashProduct.name)")
                     .font(.custom("Montserrat-semibold", size: 12))
-                Text("\(String(format: "%.1f", price))$")
+                Text("\(String(format: "%.1f", flashProduct.price))$")
                     .font(.custom("Montserrat-semibold", size: 12))
             }
             HStack {
-                Text("-\(discount)%")
+                Text("-\(flashProduct.discount ?? 0)%")
                     .padding(5)
                     .background(.red.opacity(0.5))
                     .clipShape(Capsule())
@@ -48,13 +46,42 @@ struct FlashView: View {
                     Spacer()
                     HStack(spacing: 10) {
                         Button {
-                            //
+                            flashProduct.isLiked?.toggle()
+                            if flashProduct.isLiked! && !favouriteProducts.contains(flashProduct) {
+                                favouriteProducts.append(flashProduct)
+                            }
                         } label: {
-                            Image(systemName: "heart")
+                            Image(systemName: flashProduct.isLiked! ? "heart.fill" : "heart")
                                 .foregroundColor(.black)
                         }
+                        
+                        .onChange(of: favouriteProducts) { newValue in
+                            var temp = false
+                            for value in newValue {
+                                if value.name == flashProduct.name {
+                                    temp = true
+                                }
+                            }
+                            if !temp {
+                                flashProduct.isLiked = false
+                            }
+                        }
+                        .onChange(of: flashProduct.isLiked, perform: { newValue in
+                            if !newValue! {
+                                favouriteProducts = favouriteProducts.filter { $0.name != flashProduct.name}
+                            }
+                        })
+                        .onAppear {
+                            for item in favouriteProducts {
+                                if item.name == flashProduct.name {
+                                    flashProduct.isLiked = true
+                                }
+                            }
+                        }
                         Button {
-                            //
+                            if !viewModel.cartProducts.contains(flashProduct) {
+                                viewModel.cartProducts.append(flashProduct)
+                            }
                         } label: {
                             Image(systemName: "plus.circle")
                                 .foregroundColor(.black)

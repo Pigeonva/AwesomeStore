@@ -41,8 +41,11 @@ struct HomeView: View {
                 HStack {
                     VStack(spacing: 1){
                         Button {
-                            viewModel.visabilityIndex = 2
-                            
+                            if viewModel.visabilityIndex != 2 {
+                                viewModel.visabilityIndex = 2
+                            } else {
+                                viewModel.visabilityIndex = 0
+                            }
                         } label: {
                             Image(systemName: "iphone.rear.camera")
                                 .padding(10)
@@ -57,7 +60,11 @@ struct HomeView: View {
                     Spacer()
                     VStack(spacing: 1){
                         Button {
-                            viewModel.visabilityIndex = 3
+                            if viewModel.visabilityIndex != 3 {
+                                viewModel.visabilityIndex = 3
+                            } else {
+                                viewModel.visabilityIndex = 0
+                            }
                         } label: {
                             Image(systemName: "gamecontroller")
                                 .padding(10)
@@ -72,7 +79,11 @@ struct HomeView: View {
                     Spacer()
                     VStack(spacing: 1){
                         Button {
-                            viewModel.visabilityIndex = 4
+                            if viewModel.visabilityIndex != 4 {
+                                viewModel.visabilityIndex = 4
+                            } else {
+                                viewModel.visabilityIndex = 0
+                            }
                         } label: {
                             Image(systemName: "car")
                                 .padding(10)
@@ -87,7 +98,11 @@ struct HomeView: View {
                     Spacer()
                     VStack(spacing: 1){
                         Button {
-                            viewModel.visabilityIndex = 5
+                            if viewModel.visabilityIndex != 5 {
+                                viewModel.visabilityIndex = 5
+                            } else {
+                                viewModel.visabilityIndex = 0
+                            }
                         } label: {
                             Image(systemName: "soccerball")
                                 .padding(10)
@@ -114,8 +129,8 @@ struct HomeView: View {
                             .padding(.top, 30)
                             ScrollView(.horizontal) {
                                 HStack(spacing: 15) {
-                                    ForEach(viewModel.latestProducts, id: \.self) { product in
-                                        LatestView(category: product.category, name: product.name, price: product.price, imageUrl: product.image_url)
+                                    ForEach($viewModel.latestProducts, id: \.self) { $product in
+                                        LatestView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, latestProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                                     }
                                 }
                             }
@@ -132,8 +147,8 @@ struct HomeView: View {
                             .padding(.top, 30)
                             ScrollView(.horizontal) {
                                 HStack(spacing: 15) {
-                                    ForEach(viewModel.flashProducts, id: \.self) { product in
-                                        FlashView(category: product.category, name: product.name, price: product.price, discount: product.discount ?? 0, imageUrl: product.image_url)
+                                    ForEach($viewModel.flashProducts, id: \.self) { $product in
+                                        FlashView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, flashProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url, discount: product.discount))
                                     }
                                 }
                             }
@@ -145,9 +160,10 @@ struct HomeView: View {
                 if viewModel.visabilityIndex == 1 {
                         List {
                             ForEach($viewModel.containerArray, id: \.self) { $product in
-                                ProductView(name: product.name, price: product.price, imageUrl: product.image_url)
+                                ProductView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, product: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                             }
                         }
+                        
                         .onChange(of: viewModel.searchTextField) { newValue in
                             viewModel.searchByWord(term: newValue)
                         }
@@ -155,7 +171,7 @@ struct HomeView: View {
                 if viewModel.visabilityIndex == 2 || viewModel.visabilityIndex == 3 || viewModel.visabilityIndex == 4 || viewModel.visabilityIndex == 5 {
                     List {
                         ForEach($viewModel.categoryArray, id: \.self) { $product in
-                            ProductView(name: product.name, price: product.price, imageUrl: product.image_url)
+                            ProductView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, product: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                         }
                     }
                 }

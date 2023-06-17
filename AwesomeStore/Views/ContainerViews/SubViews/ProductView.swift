@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ProductView: View {
     
-    @State var name: String = ""
-    @State var price: Double = 0.0
-    @State var imageUrl: String = ""
-    @State var isLiked: Bool = false
+    @ObservedObject var viewModel: ContentViewViewModel
+    @Binding var favouriteProducts: [Product]
+    @State var product = Product()
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: imageUrl), scale: 1, content: { image in
+            AsyncImage(url: URL(string: product.image_url), scale: 1, content: { image in
                 image
                     .resizable()
             }, placeholder: {
@@ -29,10 +28,10 @@ struct ProductView: View {
                 Spacer()
                 VStack {
                     Spacer()
-                    Text("\(name)")
+                    Text("\(product.name)")
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
-                    Text("\(String(format: "%.1f", price))$")
+                    Text("\(String(format: "%.1f", product.price))$")
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
                 }
@@ -41,17 +40,47 @@ struct ProductView: View {
                     Spacer()
                     HStack(spacing: 10){
                         Button {
-                            //
+                            product.isLiked?.toggle()
+                            if product.isLiked! && !favouriteProducts.contains(product) {
+                                favouriteProducts.append(product)
+                            }
                         } label: {
-                            Image(systemName: "heart")
+                            Image(systemName: product.isLiked ?? false ? "heart.fill" : "heart")
                                 .foregroundColor(.black)
                         }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .onChange(of: favouriteProducts) { newValue in
+                            var temp = false
+                            for value in newValue {
+                                if value.name == product.name {
+                                    temp = true
+                                }
+                            }
+                            if !temp {
+                                product.isLiked = false
+                            }
+                        }
+                        .onChange(of: product.isLiked, perform: { newValue in
+                            if !newValue! {
+                                favouriteProducts = favouriteProducts.filter { $0.name != product.name}
+                            }
+                        })
+                        .onAppear {
+                            for item in favouriteProducts {
+                                if item.name == product.name {
+                                    product.isLiked = true
+                                }
+                            }
+                        }
                         Button {
-                            //
+                            if !viewModel.cartProducts.contains(product) {
+                                viewModel.cartProducts.append(product)
+                            }
                         } label: {
                             Image(systemName: "plus.circle")
                                 .foregroundColor(.black)
                         }
+                        .buttonStyle(BorderlessButtonStyle())
                     }
                 }
                 
@@ -59,12 +88,5 @@ struct ProductView: View {
             .padding(.horizontal, 2)
             .padding(.bottom, 10)
         }
-    }
-}
-
-
-struct ProductView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductView()
     }
 }

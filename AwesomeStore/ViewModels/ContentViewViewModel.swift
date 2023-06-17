@@ -12,31 +12,31 @@ class ContentViewViewModel: ObservableObject {
     
     @ObservedObject var networkManager = NetworkManager()
     @Binding var goToRoot: Bool
+    @Binding var user: User
+    
+    //HomeView properties
     
     @Published var selection = "home"
     @Published var tabSelection: TabBarItem = .home
     @Published var visabilityIndex = 0 {
         didSet {
-            
-        getCategoryArray
-            .assign(to: &$categoryArray)
+            getCategoryArray
+                .assign(to: &$categoryArray)
         }
     }
     @Published var searchTextField = ""
-    @Binding var user: User
-    
     @Published var selected = 0
     @Published var location = ["Moscow", "Kazan", "Piter", "Sochi", "Volgograd", "Kaliningrad", "Orenburg"]
     @Published var cityIndex = 0
-    
     @Published var latestProducts = [Product]()
     @Published var flashProducts = [Product]()
+    @Published var containerArray = [Product]()
+    @Published var categoryArray = [Product]()
+    
     lazy var allProducts: [Product] = {
         var amount = latestProducts + flashProducts
         return amount
     }()
-    @Published var containerArray = [Product]()
-    @Published var categoryArray = [Product]()
     
     lazy private var getLatestProducts: AnyPublisher<[Product], Never> = {
         networkManager.getLatestProducts()
@@ -63,12 +63,20 @@ class ContentViewViewModel: ObservableObject {
     }()
     
     lazy private var getCategoryArray: AnyPublisher<[Product], Never> = {
-       $visabilityIndex
+        $visabilityIndex
             .map { index in
-               return self.setCategories(index: index)
+                return self.setCategories(index: index)
             }
             .eraseToAnyPublisher()
     }()
+    
+    // FavouritesView properties
+    
+    @Published var favouriteProducts = [Product]()
+    
+    // CartView properties
+    
+    @Published var cartProducts = [Product]()
     
     init(user: Binding<User>, goToRoot: Binding<Bool>) {
         self._user = user
@@ -118,5 +126,13 @@ class ContentViewViewModel: ObservableObject {
             }
         }
         return array
+    }
+    
+    func defineAmount(products: [Product]) -> Double {
+        var amount = 0.0
+        products.forEach { product in
+            amount += product.price
+        }
+        return amount
     }
 }

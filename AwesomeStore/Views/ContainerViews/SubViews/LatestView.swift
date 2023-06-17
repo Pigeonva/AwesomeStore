@@ -9,14 +9,13 @@ import SwiftUI
 
 struct LatestView: View {
     
-    @State var category: String = ""
-    @State var name: String = ""
-    @State var price: Double = 0.0
-    @State var imageUrl: String = ""
+    @ObservedObject var viewModel: ContentViewViewModel
+    @Binding var favouriteProducts: [Product] 
+    @State var latestProduct = Product()
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: imageUrl), scale: 1, content: { image in
+            AsyncImage(url: URL(string: latestProduct.image_url), scale: 1, content: { image in
                 image
                     .resizable()
             }, placeholder: {
@@ -28,27 +27,64 @@ struct LatestView: View {
             HStack {
                 VStack {
                     Spacer()
-                    Text("\(category)")
+                    Text("\(latestProduct.category)")
                         .padding(5)
                         .background(.blue.opacity(0.5))
                         .clipShape(Capsule())
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
-                    Text("\(name)")
+                    Text("\(latestProduct.name)")
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
-                    Text("\(String(format: "%.1f", price))$")
+                    Text("\(String(format: "%.1f", latestProduct.price))$")
                         .font(.custom("Montserrat-semibold", size: 12))
                         .foregroundColor(.black)
                 }
                 Spacer()
                 VStack {
                     Spacer()
-                    Button {
-                        //
-                    } label: {
-                        Image(systemName: "plus.circle")
-                            .foregroundColor(.black)
+                    HStack(spacing: 5){
+                        Button {
+                            latestProduct.isLiked?.toggle()
+                            if latestProduct.isLiked! && !favouriteProducts.contains(latestProduct) {
+                                favouriteProducts.append(latestProduct)
+                            }
+                        } label: {
+                            Image(systemName: latestProduct.isLiked ?? false ? "heart.fill" : "heart")
+                                .foregroundColor(.black)
+                        }
+                        .onChange(of: favouriteProducts) { newValue in
+                            var temp = false
+                            for value in newValue {
+                                if value.name == latestProduct.name {
+                                    temp = true
+                                }
+                            }
+                            if !temp {
+                                latestProduct.isLiked = false
+                            }
+                        }
+                        .onChange(of: latestProduct.isLiked, perform: { newValue in
+                            if !newValue! {
+                                favouriteProducts = favouriteProducts.filter { $0.name != latestProduct.name}
+                            }
+                        })
+                        .onAppear {
+                            for item in favouriteProducts {
+                                if item.name == latestProduct.name {
+                                    latestProduct.isLiked = true
+                                }
+                            }
+                        }
+
+                        Button {
+                            if !viewModel.cartProducts.contains(latestProduct) {
+                                viewModel.cartProducts.append(latestProduct)
+                            }
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.black)
+                        }
                     }
                 }
                 

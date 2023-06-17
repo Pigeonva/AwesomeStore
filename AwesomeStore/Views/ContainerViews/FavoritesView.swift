@@ -17,11 +17,12 @@ struct FavoritesView: View {
             VStack {
                 Text("Favorites")
                     .font(.custom("Montserrat-semibold", size: 30))
-                ScrollView {
-                    VStack(spacing: 15){
-                        LikeView()
+                List {
+                    ForEach($viewModel.favouriteProducts, id: \.self) { $product in
+                        LikeView(viewModel: viewModel, favoriteProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                     }
                 }
+                Spacer(minLength: 100)
             }
             .padding(.horizontal, 20)
             .padding(.top, 50)

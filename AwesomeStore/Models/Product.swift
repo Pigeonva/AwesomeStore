@@ -12,5 +12,6 @@ struct Product: Codable, Hashable {
     var name: String = ""
     var price: Double = 0.0
     var image_url: String = ""
-    var discount: Int?
+    var discount: Int? = 0
+    var isLiked: Bool? = false
 }
