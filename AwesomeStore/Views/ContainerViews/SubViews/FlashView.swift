@@ -52,7 +52,7 @@ struct FlashView: View {
                             }
                         } label: {
                             Image(systemName: flashProduct.isLiked! ? "heart.fill" : "heart")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         
                         .onChange(of: favouriteProducts) { newValue in
@@ -81,10 +81,11 @@ struct FlashView: View {
                         Button {
                             if !viewModel.cartProducts.contains(flashProduct) {
                                 viewModel.cartProducts.append(flashProduct)
+                                viewModel.amount += flashProduct.price
                             }
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                     }
                 }}

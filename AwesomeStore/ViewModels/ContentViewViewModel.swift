@@ -77,6 +77,13 @@ class ContentViewViewModel: ObservableObject {
     // CartView properties
     
     @Published var cartProducts = [Product]()
+    @Published var amount = 0.0
+    
+    // ProfileView properties
+    
+    lazy var balance: Double = {
+        user.balance
+    }()
     
     init(user: Binding<User>, goToRoot: Binding<Bool>) {
         self._user = user
@@ -126,13 +133,5 @@ class ContentViewViewModel: ObservableObject {
             }
         }
         return array
-    }
-    
-    func defineAmount(products: [Product]) -> Double {
-        var amount = 0.0
-        products.forEach { product in
-            amount += product.price
-        }
-        return amount
     }
 }

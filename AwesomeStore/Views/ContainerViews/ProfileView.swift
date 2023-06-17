@@ -43,7 +43,7 @@ struct ProfileView: View {
                     HStack(spacing: 10) {
                         Image(systemName: "person.text.rectangle")
                             .foregroundColor(.black)
-                        Text("My balance: \(viewModel.user.balance)$")
+                        Text("My balance: \(String(format: "%.1f", viewModel.balance))$")
                             .font(.custom("Montserrat", size: 15))
                             .foregroundColor(.black)
                         Spacer()

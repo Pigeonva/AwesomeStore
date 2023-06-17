@@ -11,5 +11,5 @@ struct User: Codable {
     var fullName = String()
     var email = String()
     var password = String()
-    var balance: Int = 3500
+    var balance: Double = 35000.0
 }

@@ -27,11 +27,17 @@ struct HomeView: View {
                                 Text("\(self.viewModel.location[city])")
                             }
                         }
-                        .tint(.black)
+                        .tint(Color("TextColor"))
                     }
                 }
                 .padding(.horizontal, 20)
-                TextField("What are you looking for?", text: $viewModel.searchTextField)
+                TextField("", text: $viewModel.searchTextField)
+                    .placeholder(when: viewModel.searchTextField.isEmpty, placeholder: {
+                        Text("What are you looking for?")
+                            .foregroundColor(.gray)
+                            .font(.custom("Montserrat", size: 15))
+                    })
+                    .foregroundColor(.black)
                     .font(.custom("Montserrat", size: 12))
                     .multilineTextAlignment(.center)
                     .frame(width: 289, height: 29)
@@ -50,7 +56,7 @@ struct HomeView: View {
                             Image(systemName: "iphone.rear.camera")
                                 .padding(10)
                                 .font(.largeTitle)
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                                 .background(viewModel.visabilityIndex == 2 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
@@ -69,7 +75,7 @@ struct HomeView: View {
                             Image(systemName: "gamecontroller")
                                 .padding(10)
                                 .font(.largeTitle)
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                                 .background(viewModel.visabilityIndex == 3 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
@@ -88,7 +94,7 @@ struct HomeView: View {
                             Image(systemName: "car")
                                 .padding(10)
                                 .font(.largeTitle)
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                                 .background(viewModel.visabilityIndex == 4 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }
@@ -107,7 +113,7 @@ struct HomeView: View {
                             Image(systemName: "soccerball")
                                 .padding(10)
                                 .font(.largeTitle)
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                                 .background(viewModel.visabilityIndex == 5 ? .blue.opacity(0.3) : .clear)
                                 .clipShape(Circle())
                         }

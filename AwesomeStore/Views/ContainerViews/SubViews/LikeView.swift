@@ -46,7 +46,10 @@ struct LikeView: View {
                 .animation(.easeIn, value: 0.8)
                 Spacer()
                 Button {
-                    //
+                    if !viewModel.cartProducts.contains(favoriteProduct) {
+                        viewModel.cartProducts.append(favoriteProduct)
+                        viewModel.amount += favoriteProduct.price
+                    }
                 } label: {
                     Image(systemName: "plus.circle")
                         .foregroundColor(.black)

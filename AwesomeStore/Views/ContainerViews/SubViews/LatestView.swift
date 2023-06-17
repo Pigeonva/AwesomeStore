@@ -32,13 +32,10 @@ struct LatestView: View {
                         .background(.blue.opacity(0.5))
                         .clipShape(Capsule())
                         .font(.custom("Montserrat-semibold", size: 12))
-                        .foregroundColor(.black)
                     Text("\(latestProduct.name)")
                         .font(.custom("Montserrat-semibold", size: 12))
-                        .foregroundColor(.black)
                     Text("\(String(format: "%.1f", latestProduct.price))$")
                         .font(.custom("Montserrat-semibold", size: 12))
-                        .foregroundColor(.black)
                 }
                 Spacer()
                 VStack {
@@ -51,7 +48,7 @@ struct LatestView: View {
                             }
                         } label: {
                             Image(systemName: latestProduct.isLiked ?? false ? "heart.fill" : "heart")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .onChange(of: favouriteProducts) { newValue in
                             var temp = false
@@ -80,10 +77,11 @@ struct LatestView: View {
                         Button {
                             if !viewModel.cartProducts.contains(latestProduct) {
                                 viewModel.cartProducts.append(latestProduct)
+                                viewModel.amount += latestProduct.price
                             }
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                     }
                 }

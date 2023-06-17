@@ -46,6 +46,7 @@ struct CartElementView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
+                    .padding(.top, 20)
                     .buttonStyle(BorderlessButtonStyle())
                 }
                 Spacer()
@@ -85,9 +86,6 @@ struct CartElementView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .onAppear(perform: {
-                        amount += cartProduct.price
-                    })
                     .buttonStyle(BorderlessButtonStyle())
                     
                 }

@@ -18,7 +18,7 @@ struct ContentView: View {
                 .tabBarItem(tab: .home, selection: $viewModel.tabSelection)
             FavoritesView(viewModel: self.viewModel)
                 .tabBarItem(tab: .favorites, selection: $viewModel.tabSelection)
-            CartView(viewModel: self.viewModel)
+            CartView(viewModel: self.viewModel, amount: $viewModel.amount)
                 .tabBarItem(tab: .cart, selection: $viewModel.tabSelection)
             ProfileView(viewModel: viewModel)
                 .tabBarItem(tab: .profile, selection: $viewModel.tabSelection)
