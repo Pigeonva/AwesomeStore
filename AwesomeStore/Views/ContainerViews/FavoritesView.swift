@@ -11,6 +11,11 @@ struct FavoritesView: View {
     
     @ObservedObject var viewModel: ContentViewViewModel
     
+    init(viewModel: ContentViewViewModel) {
+        UICollectionView.appearance().backgroundColor = UIColor.clear
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         ZStack {
             Color("Background")
@@ -21,10 +26,10 @@ struct FavoritesView: View {
                     ForEach($viewModel.favouriteProducts, id: \.self) { $product in
                         LikeView(viewModel: viewModel, favoriteProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                     }
+                    .background(Color("Background"))
                 }
                 Spacer(minLength: 100)
             }
-            .padding(.horizontal, 20)
             .padding(.top, 50)
         }
         .ignoresSafeArea()

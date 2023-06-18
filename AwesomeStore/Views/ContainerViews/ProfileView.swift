@@ -30,22 +30,22 @@ struct ProfileView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "creditcard")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Text("Payment method")
                                 .font(.custom("Montserrat", size: 15))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .padding(.horizontal, 50)
                     }
                     HStack(spacing: 10) {
                         Image(systemName: "person.text.rectangle")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("TextColor"))
                         Text("My balance: \(String(format: "%.1f", viewModel.balance))$")
                             .font(.custom("Montserrat", size: 15))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("TextColor"))
                         Spacer()
                     }
                     .padding(.horizontal, 50)
@@ -54,13 +54,13 @@ struct ProfileView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "clock")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Text("Payment history")
                                 .font(.custom("Montserrat", size: 15))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .padding(.horizontal, 50)
                     }
@@ -69,13 +69,13 @@ struct ProfileView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "arrow.triangle.2.circlepath")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Text("Restore purchase")
                                 .font(.custom("Montserrat", size: 15))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .padding(.horizontal, 50)
                     }
@@ -84,13 +84,13 @@ struct ProfileView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "questionmark.circle")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Text("Help")
                                 .font(.custom("Montserrat", size: 15))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .padding(.horizontal, 50)
                     }
@@ -99,13 +99,13 @@ struct ProfileView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: "door.right.hand.open")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Text("Log out")
                                 .font(.custom("Montserrat", size: 15))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                             Spacer()
                             Image(systemName: "chevron.right")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .padding(.horizontal, 50)
                     }

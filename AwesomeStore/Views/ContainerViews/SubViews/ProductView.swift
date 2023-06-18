@@ -30,15 +30,15 @@ struct ProductView: View {
                     Spacer()
                     Text("\(product.name)")
                         .font(.custom("Montserrat-semibold", size: 12))
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("TextColor"))
                     Text("\(String(format: "%.1f", product.price))$")
                         .font(.custom("Montserrat-semibold", size: 12))
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("TextColor"))
                 }
                 Spacer()
                 VStack {
                     Spacer()
-                    HStack(spacing: 10){
+                    HStack{
                         Button {
                             product.isLiked?.toggle()
                             if product.isLiked! && !favouriteProducts.contains(product) {
@@ -46,7 +46,7 @@ struct ProductView: View {
                             }
                         } label: {
                             Image(systemName: product.isLiked ?? false ? "heart.fill" : "heart")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         .onChange(of: favouriteProducts) { newValue in
@@ -78,7 +78,7 @@ struct ProductView: View {
                             }
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("TextColor"))
                         }
                         .buttonStyle(BorderlessButtonStyle())
                     }

@@ -13,7 +13,7 @@ struct LikeView: View {
     @State var favoriteProduct = Product()
     
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
             VStack {
                 AsyncImage(url: URL(string: favoriteProduct.image_url), scale: 1, content: { image in
                     image
@@ -24,26 +24,24 @@ struct LikeView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 200, height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                
-                VStack {
-                    Text(favoriteProduct.name)
-                        .font(.custom("Montserrat", size: 15))
-                    Text("\(String(format: "%.1f", favoriteProduct.price))$")
-                        .font(.custom("Montserrat", size: 15))
-                        .padding(.top, 5)
-                }
+                Text(favoriteProduct.name)
+                    .font(.custom("Montserrat", size: 15))
+                Text("\(String(format: "%.1f", favoriteProduct.price))$")
+                    .font(.custom("Montserrat", size: 15))
+                    .padding(.top, 5)
             }
             Spacer()
+            HStack{
+                Spacer()
             VStack {
                 Button {
                     viewModel.favouriteProducts = viewModel.favouriteProducts.filter { $0.name != favoriteProduct.name}
                 } label: {
-                    Text("Delete")
-                        .font(.custom("Montserrat-semibold", size: 20))
-                        .foregroundColor(.black)
+                    Image(systemName: "x.square")
+                        .foregroundColor(Color("TextColor"))
+                        .font(.largeTitle)
                 }
                 .buttonStyle(BorderlessButtonStyle())
-                .animation(.easeIn, value: 0.8)
                 Spacer()
                 Button {
                     if !viewModel.cartProducts.contains(favoriteProduct) {
@@ -52,13 +50,14 @@ struct LikeView: View {
                     }
                 } label: {
                     Image(systemName: "plus.circle")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("TextColor"))
                         .font(.largeTitle)
                 }
                 .buttonStyle(BorderlessButtonStyle())
                 Spacer()
-            }
+            }}
         }
+        .padding(.horizontal, 20)
     }
 }
 

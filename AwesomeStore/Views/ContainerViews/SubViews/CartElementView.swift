@@ -43,7 +43,7 @@ struct CartElementView: View {
                         quantity = 1
                     } label: {
                         Image(systemName: "x.circle")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("TextColor"))
                             .font(.title)
                     }
                     .padding(.top, 20)
@@ -70,7 +70,7 @@ struct CartElementView: View {
                             .padding(3)
                             .background(.blue.opacity(0.5))
                             .clipShape(Capsule())
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("TextColor"))
                             .font(.title)
                     }
                     .buttonStyle(BorderlessButtonStyle())
@@ -83,7 +83,7 @@ struct CartElementView: View {
                             .padding(3)
                             .background(.blue.opacity(0.5))
                             .clipShape(Capsule())
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("TextColor"))
                             .font(.title)
                     }
                     .buttonStyle(BorderlessButtonStyle())
