@@ -31,7 +31,20 @@ struct CartView: View {
                     ForEach($viewModel.cartProducts, id: \.self) { $product in
                         CartElementView(viewModel: viewModel, cartProducts: $viewModel.cartProducts, cartProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url), amount: $amount)
                     }
-                    .background(Color("Background"))
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .background(.clear)
+                            .foregroundColor(Color("RowBackground"))
+                            .padding(
+                                EdgeInsets(
+                                    top: 5,
+                                    leading: 10,
+                                    bottom: 5,
+                                    trailing: 10
+                                )
+                            )
+                    )
+                    .listRowSeparator(.hidden)
                 }
                 Spacer(minLength: 200)
             }

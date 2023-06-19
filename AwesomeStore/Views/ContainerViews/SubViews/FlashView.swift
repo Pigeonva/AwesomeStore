@@ -18,6 +18,7 @@ struct FlashView: View {
             AsyncImage(url: URL(string: flashProduct.image_url), scale: 1, content: { image in
                 image
                     .resizable()
+                    .cornerRadius(10)
             }, placeholder: {
                 Color.blue.opacity(0.5)
             })
@@ -79,9 +80,11 @@ struct FlashView: View {
                             }
                         }
                         Button {
-                            if !viewModel.cartProducts.contains(flashProduct) {
-                                viewModel.cartProducts.append(flashProduct)
-                                viewModel.amount += flashProduct.price
+                            var tempProd = flashProduct
+                            tempProd.isLiked = false
+                            if !viewModel.cartProducts.contains(tempProd) {
+                                viewModel.cartProducts.append(tempProd)
+                                viewModel.amount += tempProd.price
                             }
                         } label: {
                             Image(systemName: "plus.circle")

@@ -29,7 +29,6 @@ struct CartElementView: View {
                     Color.blue.opacity(0.5)
                 })
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 Spacer()
             }
@@ -89,6 +88,7 @@ struct CartElementView: View {
                     .buttonStyle(BorderlessButtonStyle())
                     
                 }
+                .padding(.bottom, 15)
             }
         }
         .padding(.horizontal, 20)

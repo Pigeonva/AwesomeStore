@@ -22,7 +22,6 @@ struct LikeView: View {
                     Color.blue.opacity(0.5)
                 })
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 Text(favoriteProduct.name)
                     .font(.custom("Montserrat", size: 15))
@@ -37,16 +36,18 @@ struct LikeView: View {
                 Button {
                     viewModel.favouriteProducts = viewModel.favouriteProducts.filter { $0.name != favoriteProduct.name}
                 } label: {
-                    Image(systemName: "x.square")
+                    Text("Delete")
+                        .font(.custom("Montserrat-semibold", size: 15))
                         .foregroundColor(Color("TextColor"))
-                        .font(.largeTitle)
                 }
                 .buttonStyle(BorderlessButtonStyle())
                 Spacer()
                 Button {
-                    if !viewModel.cartProducts.contains(favoriteProduct) {
-                        viewModel.cartProducts.append(favoriteProduct)
-                        viewModel.amount += favoriteProduct.price
+                    var tempProd = favoriteProduct
+                    tempProd.isLiked = false
+                    if !viewModel.cartProducts.contains(tempProd) {
+                        viewModel.cartProducts.append(tempProd)
+                        viewModel.amount += tempProd.price
                     }
                 } label: {
                     Image(systemName: "plus.circle")
@@ -56,6 +57,7 @@ struct LikeView: View {
                 .buttonStyle(BorderlessButtonStyle())
                 Spacer()
             }}
+            .padding(.top, 15)
         }
         .padding(.horizontal, 20)
     }

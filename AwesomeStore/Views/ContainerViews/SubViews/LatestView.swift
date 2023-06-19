@@ -18,6 +18,7 @@ struct LatestView: View {
             AsyncImage(url: URL(string: latestProduct.image_url), scale: 1, content: { image in
                 image
                     .resizable()
+                    .cornerRadius(10)
             }, placeholder: {
                 Color.blue.opacity(0.5)
             })
@@ -75,9 +76,11 @@ struct LatestView: View {
                         }
 
                         Button {
-                            if !viewModel.cartProducts.contains(latestProduct) {
-                                viewModel.cartProducts.append(latestProduct)
-                                viewModel.amount += latestProduct.price
+                            var tempProd = latestProduct
+                            tempProd.isLiked = false
+                            if !viewModel.cartProducts.contains(tempProd) {
+                                viewModel.cartProducts.append(tempProd)
+                                viewModel.amount += tempProd.price
                             }
                         } label: {
                             Image(systemName: "plus.circle")

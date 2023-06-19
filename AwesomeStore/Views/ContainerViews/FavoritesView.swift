@@ -26,7 +26,20 @@ struct FavoritesView: View {
                     ForEach($viewModel.favouriteProducts, id: \.self) { $product in
                         LikeView(viewModel: viewModel, favoriteProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                     }
-                    .background(Color("Background"))
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .background(.clear)
+                            .foregroundColor(Color("RowBackground"))
+                            .padding(
+                                EdgeInsets(
+                                    top: 5,
+                                    leading: 10,
+                                    bottom: 5,
+                                    trailing: 10
+                                )
+                            )
+                    )
+                    .listRowSeparator(.hidden)
                 }
                 Spacer(minLength: 100)
             }

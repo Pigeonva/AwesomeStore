@@ -138,7 +138,6 @@ struct HomeView: View {
                                     ForEach($viewModel.latestProducts, id: \.self) { $product in
                                         LatestView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, latestProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                                     }
-                                    .background(Color("Background"))
                                 }
                             }
                             .padding(.horizontal, 20)
@@ -157,7 +156,6 @@ struct HomeView: View {
                                     ForEach($viewModel.flashProducts, id: \.self) { $product in
                                         FlashView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, flashProduct: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url, discount: product.discount))
                                     }
-                                    .background(Color("Background"))
                                 }
                             }
                             .padding(.leading, 20)
@@ -170,9 +168,21 @@ struct HomeView: View {
                             ForEach($viewModel.containerArray, id: \.self) { $product in
                                 ProductView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, product: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                             }
-                            .background(Color("Background"))
+                            .listRowBackground(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .background(.clear)
+                                    .foregroundColor(Color("RowBackground"))
+                                    .padding(
+                                        EdgeInsets(
+                                            top: 5,
+                                            leading: 10,
+                                            bottom: 5,
+                                            trailing: 10
+                                        )
+                                    )
+                            )
+                            .listRowSeparator(.hidden)
                         }
-                        
                         .onChange(of: viewModel.searchTextField) { newValue in
                             viewModel.searchByWord(term: newValue)
                         }
@@ -182,7 +192,20 @@ struct HomeView: View {
                         ForEach($viewModel.categoryArray, id: \.self) { $product in
                             ProductView(viewModel: viewModel, favouriteProducts: $viewModel.favouriteProducts, product: Product(category: product.category, name: product.name, price: product.price, image_url: product.image_url))
                         }
-                        .background(Color("Background"))
+                        .listRowBackground(
+                            RoundedRectangle(cornerRadius: 10)
+                                .background(.clear)
+                                .foregroundColor(Color("RowBackground"))
+                                .padding(
+                                    EdgeInsets(
+                                        top: 5,
+                                        leading: 10,
+                                        bottom: 5,
+                                        trailing: 10
+                                    )
+                                )
+                        )
+                        .listRowSeparator(.hidden)
                     }
                 }
                 Spacer(minLength: 100)
